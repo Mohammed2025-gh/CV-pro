@@ -1,0 +1,1674 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<title>CV Pro</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+
+<style>
+/* ═══════════════════════════════
+   RESET & VARIABLES
+═══════════════════════════════ */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+:root{
+  --bg:#0e1118;--s1:#161c28;--s2:#1c2235;--s3:#222840;--s4:#28304a;
+  --b1:#2c3555;--b2:#3a4570;--b3:#4a5580;
+  --ac:#4f7cff;--ac2:#7c3aed;--acg:#10b981;--acr:#ef4444;
+  --t1:#eef0ff;--t2:#8892bb;--t3:#4a5280;--t4:#2a3050;
+  --r:12px;--rs:8px;--rx:6px;
+  --nav:56px;--bottom:64px;
+  --font:'Cairo',sans-serif;
+}
+[data-lt]{
+  --bg:#f0f3ff;--s1:#ffffff;--s2:#f5f7ff;--s3:#eef1ff;--s4:#e5eaff;
+  --b1:#d8dff5;--b2:#c0caee;--b3:#a8b4e0;
+  --t1:#111827;--t2:#4a5580;--t3:#8892bb;--t4:#c0caee;
+}
+body{font-family:var(--font);background:var(--bg);color:var(--t1);min-height:100vh;overflow-x:hidden;font-size:14px;line-height:1.5}
+button,input,textarea,select{font-family:var(--font);outline:none}
+button{cursor:pointer;border:none;background:none}
+img{max-width:100%}
+::-webkit-scrollbar{width:4px;height:4px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:var(--b1);border-radius:4px}
+
+/* ═══════════════════════════════
+   UTILITY BUTTONS
+═══════════════════════════════ */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;padding:10px 20px;border-radius:var(--rx);font-size:.84rem;font-weight:700;transition:all .15s;cursor:pointer;border:1.5px solid transparent;white-space:nowrap;font-family:var(--font)}
+.btn-sm{padding:7px 14px;font-size:.78rem;gap:5px}
+.btn-xs{padding:5px 10px;font-size:.72rem;gap:4px}
+.btn-pri{background:var(--ac);color:#fff;border-color:var(--ac);box-shadow:0 2px 16px rgba(79,124,255,.3)}
+.btn-pri:hover{filter:brightness(1.1);transform:translateY(-1px)}
+.btn-pri:active{transform:translateY(0);filter:brightness(.95)}
+.btn-ghost{background:var(--s3);color:var(--t2);border-color:var(--b1)}
+.btn-ghost:hover{border-color:var(--b2);color:var(--t1)}
+.btn-green{background:var(--acg);color:#fff;border-color:var(--acg);box-shadow:0 2px 14px rgba(16,185,129,.28)}
+.btn-green:hover{filter:brightness(1.05)}
+.btn-red{background:var(--acr);color:#fff;border-color:var(--acr)}
+.btn-red:hover{filter:brightness(1.1)}
+.ib{width:36px;height:36px;border-radius:var(--rx);background:var(--s3);border:1.5px solid var(--b1);color:var(--t2);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .15s;font-size:13px;flex-shrink:0}
+.ib:hover{border-color:var(--b2);color:var(--t1)}
+.ib-sm{width:30px;height:30px;font-size:11px;border-radius:var(--rs)}
+
+/* ═══════════════════════════════
+   PAGES
+═══════════════════════════════ */
+.page{display:none;min-height:100vh}
+.page.on{display:flex;flex-direction:column}
+
+/* ═══════════════════════════════
+   LOADER
+═══════════════════════════════ */
+#loader{position:fixed;inset:0;background:var(--bg);z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px}
+.ld-logo{width:72px;height:72px;background:linear-gradient(135deg,var(--ac),var(--ac2));border-radius:20px;display:flex;align-items:center;justify-content:center;font-size:34px;animation:ldpulse 1.4s ease infinite;box-shadow:0 8px 32px rgba(79,124,255,.4)}
+@keyframes ldpulse{0%,100%{transform:scale(1);box-shadow:0 8px 32px rgba(79,124,255,.4)}50%{transform:scale(1.07);box-shadow:0 12px 42px rgba(79,124,255,.6)}}
+.ld-txt{font-size:1.1rem;font-weight:700;color:var(--t2);letter-spacing:.5px}
+.ld-dots{display:flex;gap:6px}
+.ld-dot{width:6px;height:6px;border-radius:50%;background:var(--ac);animation:lddot 1.2s ease infinite}
+.ld-dot:nth-child(2){animation-delay:.2s;background:var(--ac2)}
+.ld-dot:nth-child(3){animation-delay:.4s;background:var(--acg)}
+@keyframes lddot{0%,80%,100%{transform:scale(.8);opacity:.5}40%{transform:scale(1.2);opacity:1}}
+
+/* ═══════════════════════════════
+   LOGIN
+═══════════════════════════════ */
+#pg-login.on{align-items:center;justify-content:center;padding:20px;background:var(--bg)}
+.login-wrap{width:100%;max-width:420px}
+.login-topbar{display:flex;justify-content:flex-end;align-items:center;gap:8px;margin-bottom:18px}
+.lang-sw{display:flex;background:var(--s2);border:1.5px solid var(--b1);border-radius:var(--rx);padding:3px;gap:2px}
+.lang-sw button{padding:4px 11px;border-radius:4px;font-size:.72rem;font-weight:700;color:var(--t3);transition:all .15s;font-family:var(--font)}
+.lang-sw button.on{background:var(--ac);color:#fff}
+.login-card{background:var(--s1);border:1.5px solid var(--b1);border-radius:20px;padding:36px 30px;box-shadow:0 16px 60px rgba(0,0,0,.5)}
+.login-logo{width:64px;height:64px;background:linear-gradient(135deg,var(--ac),var(--ac2));border-radius:17px;display:flex;align-items:center;justify-content:center;margin:0 auto 14px;font-size:30px;box-shadow:0 8px 28px rgba(79,124,255,.4)}
+.login-h1{font-size:1.7rem;font-weight:900;text-align:center;letter-spacing:-1px}
+.login-h1 span{color:var(--ac)}
+.login-sub{text-align:center;color:var(--t2);font-size:.83rem;margin:6px 0 22px}
+.feats{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-bottom:22px}
+.feat{background:var(--s3);border:1.5px solid var(--b1);border-radius:var(--rs);padding:10px 12px;display:flex;align-items:center;gap:8px;font-size:.78rem;color:var(--t2)}
+.feat i{color:var(--ac);font-size:12px;width:14px;text-align:center;flex-shrink:0}
+.btn-goog{width:100%;padding:12px;background:var(--s3);border:1.5px solid var(--b1);border-radius:var(--rs);color:var(--t1);font-size:.88rem;font-weight:700;display:flex;align-items:center;justify-content:center;gap:10px;cursor:pointer;transition:all .15s;margin-bottom:10px;font-family:var(--font)}
+.btn-goog:hover{border-color:var(--ac);background:rgba(79,124,255,.06)}
+.g-dot{width:20px;height:20px;border-radius:50%;background:conic-gradient(#4285f4 0 25%,#ea4335 25% 50%,#fbbc04 50% 75%,#34a853 75%);flex-shrink:0}
+.login-or{text-align:center;color:var(--t4);font-size:.77rem;margin:12px 0;position:relative}
+.login-or::before,.login-or::after{content:'';position:absolute;top:50%;width:35%;height:1px;background:var(--b1)}
+.login-or::before{right:0}.login-or::after{left:0}
+.btn-demo{width:100%;padding:11px;border:1.5px dashed var(--b2);border-radius:var(--rs);color:var(--t2);font-size:.84rem;display:flex;align-items:center;justify-content:center;gap:8px;cursor:pointer;transition:all .15s;font-family:var(--font)}
+.btn-demo:hover{border-color:var(--ac);color:var(--ac)}
+
+/* ═══════════════════════════════
+   TOP NAV (shared)
+═══════════════════════════════ */
+.topnav{height:var(--nav);background:var(--s1);border-bottom:1.5px solid var(--b1);display:flex;align-items:center;padding:0 16px;gap:10px;position:sticky;top:0;z-index:100;flex-shrink:0}
+.topnav-logo{display:flex;align-items:center;gap:8px;font-weight:900;font-size:1.05rem}
+.topnav-logo-ico{width:32px;height:32px;background:linear-gradient(135deg,var(--ac),var(--ac2));border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0}
+.topnav-logo span{color:var(--ac)}
+.topnav-r{display:flex;align-items:center;gap:7px;margin-right:auto}
+
+/* ═══════════════════════════════
+   DASHBOARD
+═══════════════════════════════ */
+.dash-body{flex:1;overflow-y:auto;padding:20px 16px 90px;max-width:900px;margin:0 auto;width:100%}
+.dash-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;gap:10px}
+.dash-title{font-size:1.25rem;font-weight:900;letter-spacing:-.5px}
+.dash-title small{font-size:.85rem;color:var(--t2);font-weight:400;display:block;margin-top:1px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:22px}
+.stat{background:var(--s1);border:1.5px solid var(--b1);border-radius:var(--r);padding:14px 14px;display:flex;align-items:center;gap:12px}
+.stat-ico{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0}
+.s-b{background:rgba(79,124,255,.12);color:var(--ac)}
+.s-g{background:rgba(16,185,129,.12);color:var(--acg)}
+.s-p{background:rgba(124,58,237,.12);color:var(--ac2)}
+.stat-v{font-size:1.5rem;font-weight:900;line-height:1}
+.stat-l{font-size:.7rem;color:var(--t2);margin-top:2px}
+.cv-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px}
+@media(min-width:480px){.cv-grid{grid-template-columns:repeat(auto-fill,minmax(170px,1fr))}}
+.cv-card{background:var(--s1);border:1.5px solid var(--b1);border-radius:var(--r);overflow:hidden;cursor:pointer;transition:all .2s;position:relative}
+.cv-card:hover{border-color:var(--ac);transform:translateY(-2px);box-shadow:0 8px 28px rgba(79,124,255,.15)}
+.cv-thumb{height:140px;background:var(--s2);overflow:hidden;position:relative}
+.cv-inner{position:absolute;top:0;left:0;width:794px;transform:scale(0.1963);transform-origin:top left;pointer-events:none}
+.cv-meta{padding:10px 12px}
+.cv-name{font-size:.84rem;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cv-date{font-size:.68rem;color:var(--t3);margin-top:1px}
+.cv-acts{display:flex;gap:5px;margin-top:8px}
+.new-card{background:var(--s2);border:2px dashed var(--b1);border-radius:var(--r);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;cursor:pointer;transition:all .2s;min-height:200px;color:var(--t3)}
+.new-card:hover{border-color:var(--ac);color:var(--ac)}
+.new-card i{font-size:26px}
+.new-card span{font-size:.82rem;font-weight:700}
+.empty{text-align:center;padding:50px 20px;color:var(--t2)}
+.empty i{font-size:44px;opacity:.25;display:block;margin-bottom:12px}
+.empty h3{font-size:1rem;font-weight:700;margin-bottom:5px}
+
+/* ═══════════════════════════════
+   BUILDER — MOBILE FIRST
+═══════════════════════════════ */
+#pg-builder.on{flex-direction:column;height:100vh;overflow:hidden}
+.builder-nav{height:var(--nav);background:var(--s1);border-bottom:1.5px solid var(--b1);display:flex;align-items:center;padding:0 12px;gap:8px;flex-shrink:0;position:relative;z-index:50}
+.builder-nav-title{flex:1;font-size:.9rem;font-weight:700;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.builder-body{flex:1;overflow:hidden;display:flex;flex-direction:column;position:relative}
+
+/* MOBILE: left-col fills entire builder-body */
+.left-col{display:flex;flex-direction:column;flex:1;overflow:hidden;background:var(--bg)}
+
+/* STEP TABS */
+.step-tabs{display:flex;padding:0 12px;gap:2px;background:var(--s1);border-bottom:1.5px solid var(--b1);overflow-x:auto;flex-shrink:0;-webkit-overflow-scrolling:touch}
+.step-tabs::-webkit-scrollbar{display:none}
+.stab{padding:12px 14px;font-size:.73rem;font-weight:700;color:var(--t3);cursor:pointer;border-bottom:2.5px solid transparent;transition:all .15s;white-space:nowrap;font-family:var(--font)}
+.stab.on{color:var(--ac);border-bottom-color:var(--ac)}
+
+/* FORM PANEL */
+.form-panel{flex:1;overflow-y:auto;padding:16px 14px 100px;-webkit-overflow-scrolling:touch}
+.fld{margin-bottom:14px}
+.fld label{display:block;font-size:.73rem;font-weight:700;color:var(--t2);margin-bottom:5px;letter-spacing:.3px}
+.fld input,.fld textarea,.fld select{width:100%;background:var(--s2);border:1.5px solid var(--b1);border-radius:var(--rx);color:var(--t1);padding:10px 12px;font-size:.84rem;transition:border-color .15s;font-family:var(--font)}
+.fld input:focus,.fld textarea:focus,.fld select:focus{border-color:var(--ac)}
+.fld textarea{resize:vertical;min-height:80px;line-height:1.55}
+.fld-2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+
+/* PHOTO */
+.photo-box{border:2px dashed var(--b1);border-radius:var(--r);text-align:center;cursor:pointer;transition:all .15s;overflow:hidden;position:relative}
+.photo-box:hover{border-color:var(--ac)}
+.photo-box.filled{border-style:solid;border-color:var(--ac);padding:0}
+.photo-box.filled img{width:100%;height:160px;object-fit:cover;display:block}
+.photo-empty{padding:28px 20px}
+.photo-empty-ico{font-size:32px;color:var(--t3);margin-bottom:8px}
+.photo-empty-txt{font-size:.8rem;color:var(--t2);font-weight:600}
+.photo-empty-sub{font-size:.72rem;color:var(--t3);margin-top:3px}
+.photo-actions{display:flex;gap:6px;padding:8px}
+#inp-photo{display:none}
+
+/* TAGS */
+.tags-wrap{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:7px;min-height:10px}
+.t-chip{background:var(--s3);border:1.5px solid var(--b1);border-radius:var(--rx);padding:4px 10px;font-size:.76rem;color:var(--t1);display:flex;align-items:center;gap:5px}
+.t-chip button{color:var(--t3);font-size:10px;line-height:1;padding:0;width:14px;height:14px;display:flex;align-items:center;justify-content:center}
+.t-chip button:hover{color:var(--acr)}
+.tag-input-row{display:flex;gap:6px}
+.tag-input-row input{flex:1;background:var(--s2);border:1.5px solid var(--b1);border-radius:var(--rx);color:var(--t1);padding:8px 11px;font-size:.82rem;font-family:var(--font)}
+.tag-input-row input:focus{border-color:var(--ac)}
+
+/* LANG ROWS */
+.lang-row{display:grid;grid-template-columns:1fr 1fr auto;gap:6px;align-items:center;margin-bottom:7px}
+.lang-row input,.lang-row select{background:var(--s2);border:1.5px solid var(--b1);border-radius:var(--rx);color:var(--t1);padding:8px 10px;font-size:.79rem;font-family:var(--font);width:100%}
+.lang-row input:focus,.lang-row select:focus{border-color:var(--ac)}
+
+/* REP ITEMS */
+.rep-item{background:var(--s2);border:1.5px solid var(--b1);border-radius:var(--r);margin-bottom:8px;overflow:hidden}
+.rep-hd{padding:11px 12px;display:flex;align-items:center;gap:8px;cursor:pointer;user-select:none}
+.rep-hd:hover{background:var(--s3)}
+.rep-lbl{flex:1;font-size:.82rem;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--t1)}
+.rep-arrow{color:var(--t3);font-size:10px;transition:transform .2s;flex-shrink:0}
+.rep-body{padding:12px;border-top:1.5px solid var(--b1);display:none}
+.rep-body.open{display:block}
+
+/* ═══════════════════════════════
+   BOTTOM ACTION BAR (mobile)
+═══════════════════════════════ */
+.bottom-bar{position:fixed;bottom:0;left:0;right:0;background:var(--s1);border-top:1.5px solid var(--b1);padding:10px 14px;display:flex;gap:8px;z-index:200}
+.bottom-bar .btn{flex:1;padding:12px 10px;font-size:.82rem}
+
+/* ═══════════════════════════════
+   PREVIEW MODAL (full screen on mobile)
+═══════════════════════════════ */
+.preview-modal{position:fixed;inset:0;background:rgba(0,0,0,.92);z-index:500;display:none;flex-direction:column}
+.preview-modal.open{display:flex}
+.preview-topbar{height:52px;background:var(--s1);border-bottom:1.5px solid var(--b1);display:flex;align-items:center;padding:0 14px;gap:10px;flex-shrink:0}
+.preview-topbar-title{flex:1;font-size:.88rem;font-weight:700}
+.preview-scroll{flex:1;overflow:auto;-webkit-overflow-scrolling:touch;padding:20px;display:flex;align-items:flex-start;justify-content:center}
+.preview-sheet{background:#fff;flex-shrink:0}
+/* On mobile: scale down A4 to fit screen */
+.preview-sheet-wrap{width:100%;display:flex;justify-content:center}
+.preview-bottom{height:56px;background:var(--s1);border-top:1.5px solid var(--b1);display:flex;align-items:center;justify-content:center;gap:10px;padding:0 14px;flex-shrink:0}
+
+/* ═══════════════════════════════
+   DESIGN PANEL (slides up)
+═══════════════════════════════ */
+.design-sheet{position:fixed;inset:0;z-index:400;display:none;flex-direction:column}
+.design-sheet.open{display:flex}
+.design-overlay{position:absolute;inset:0;background:rgba(0,0,0,.6)}
+.design-panel{position:absolute;bottom:0;left:0;right:0;background:var(--s1);border-radius:20px 20px 0 0;max-height:85vh;display:flex;flex-direction:column;overflow:hidden}
+.design-handle{width:40px;height:4px;background:var(--b2);border-radius:2px;margin:10px auto 0}
+.design-head{padding:14px 18px 12px;border-bottom:1.5px solid var(--b1);display:flex;align-items:center;gap:10px;flex-shrink:0}
+.design-title{font-size:.95rem;font-weight:800;flex:1}
+.design-body{overflow-y:auto;padding:16px;-webkit-overflow-scrolling:touch}
+.dsec-label{font-size:.68rem;font-weight:900;letter-spacing:2.5px;text-transform:uppercase;color:var(--t3);margin-bottom:10px;margin-top:18px}
+.dsec-label:first-child{margin-top:0}
+
+/* TPL GRID in design panel */
+.tpl-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+@media(min-width:400px){.tpl-grid{grid-template-columns:repeat(3,1fr)}}
+.tpl-card{border-radius:var(--rs);overflow:hidden;cursor:pointer;border:2px solid var(--b1);transition:all .18s}
+.tpl-card:hover{border-color:var(--b2)}
+.tpl-card.on{border-color:var(--ac);box-shadow:0 0 0 3px rgba(79,124,255,.22)}
+.tpl-thumb{height:90px;overflow:hidden;background:#f0f2ff;position:relative}
+.tpl-scale{position:absolute;top:0;left:0;width:794px;transform:scale(0.133);transform-origin:top left;pointer-events:none}
+.tpl-lbl{padding:5px 6px;font-size:.68rem;font-weight:700;text-align:center;background:var(--s2);border-top:1px solid var(--b1)}
+.tpl-card.on .tpl-lbl{color:var(--ac)}
+
+/* COLORS */
+.color-dots{display:flex;flex-wrap:wrap;gap:8px}
+.cdot{width:30px;height:30px;border-radius:50%;cursor:pointer;border:2.5px solid transparent;transition:all .15s;flex-shrink:0}
+.cdot:hover{transform:scale(1.12)}
+.cdot.on{border-color:#fff;box-shadow:0 0 0 2.5px var(--ac)}
+.color-custom-row{display:flex;align-items:center;gap:10px;margin-top:10px}
+.color-custom-row input[type=color]{width:38px;height:38px;border:1.5px solid var(--b1);border-radius:var(--rx);background:var(--s2);cursor:pointer;padding:2px}
+.color-custom-row span{font-size:.78rem;color:var(--t2)}
+
+/* CV LANG BTNS */
+.cvlang-row{display:flex;gap:6px}
+.cvlang-btn{flex:1;padding:8px;border-radius:var(--rx);font-size:.78rem;font-weight:700;border:1.5px solid var(--b1);background:var(--s2);color:var(--t2);cursor:pointer;transition:all .15s;text-align:center;font-family:var(--font)}
+.cvlang-btn.on{background:var(--ac);color:#fff;border-color:var(--ac)}
+
+/* ═══════════════════════════════
+   MODALS
+═══════════════════════════════ */
+.modal-ov{position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:600;display:none;align-items:center;justify-content:center;padding:20px}
+.modal-ov.open{display:flex}
+.modal-card{background:var(--s1);border:1.5px solid var(--b1);border-radius:16px;width:100%;max-width:480px;overflow:hidden}
+.modal-hd{padding:16px 18px;border-bottom:1.5px solid var(--b1);display:flex;align-items:center;gap:10px}
+.modal-hd-title{font-weight:700;flex:1}
+.modal-bd{padding:18px}
+.modal-ft{padding:12px 18px;border-top:1.5px solid var(--b1);display:flex;gap:8px;justify-content:flex-end}
+/* crop */
+#crop-canvas{width:100%;max-width:340px;border-radius:10px;display:block;margin:0 auto}
+.crop-ctrl{display:flex;align-items:center;gap:10px;margin-top:12px}
+.crop-ctrl input[type=range]{flex:1;accent-color:var(--ac)}
+.crop-preview-ring{width:80px;height:80px;border-radius:50%;overflow:hidden;border:2.5px solid var(--ac);flex-shrink:0}
+#crop-prev{width:80px;height:80px}
+/* confirm */
+.confirm-card{background:var(--s1);border:1.5px solid var(--b1);border-radius:16px;max-width:340px;width:100%;padding:26px 22px;text-align:center}
+.confirm-ico{font-size:38px;margin-bottom:10px}
+.confirm-title{font-size:1rem;font-weight:800;margin-bottom:5px}
+.confirm-msg{font-size:.84rem;color:var(--t2);margin-bottom:18px}
+.confirm-btns{display:flex;gap:8px;justify-content:center}
+
+/* ═══════════════════════════════
+   TOAST
+═══════════════════════════════ */
+.toast{position:fixed;bottom:80px;left:50%;transform:translateX(-50%);background:var(--s1);border:1.5px solid var(--b1);border-radius:var(--rs);padding:10px 18px;font-size:.82rem;font-weight:700;z-index:1000;animation:tst .22s ease;white-space:nowrap;box-shadow:0 8px 28px rgba(0,0,0,.4)}
+.toast.ok{border-color:var(--acg);color:var(--acg)}
+.toast.err{border-color:var(--acr);color:var(--acr)}
+@keyframes tst{from{opacity:0;transform:translateX(-50%) translateY(8px)}to{opacity:1;transform:translateX(-50%) translateY(0)}}
+
+/* ═══════════════════════════════
+   DOWNLOAD PROGRESS OVERLAY
+═══════════════════════════════ */
+.dl-overlay{position:fixed;inset:0;background:rgba(0,0,0,.8);z-index:800;display:none;align-items:center;justify-content:center;flex-direction:column;gap:16px}
+.dl-overlay.open{display:flex}
+.dl-spinner{width:56px;height:56px;border:4px solid var(--b1);border-top-color:var(--ac);border-radius:50%;animation:spin .8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.dl-txt{font-size:.95rem;font-weight:700;color:var(--t1)}
+.dl-sub{font-size:.8rem;color:var(--t2)}
+
+/* ═══════════════════════════════
+   DESKTOP LAYOUT (≥ 900px)
+═══════════════════════════════ */
+
+/* Mobile: hide desktop-only elements */
+.des-only{display:none!important}
+
+@media(min-width:900px){
+  :root{--bottom:0px}
+  .des-only{display:flex!important}
+  .mob-only{display:none!important}
+  #pg-builder.on{flex-direction:column}
+  .builder-body{flex-direction:row;flex:1;overflow:hidden}
+  .left-col{width:320px;flex-shrink:0;background:var(--s1);border-left:1.5px solid var(--b1);display:flex!important;flex-direction:column;height:calc(100vh - var(--nav));overflow:hidden}
+  .mid-col{flex:1;display:flex!important;flex-direction:column;height:calc(100vh - var(--nav));overflow:hidden;min-width:0}
+  .right-col{width:300px;flex-shrink:0;background:var(--s1);border-right:1.5px solid var(--b1);display:flex!important;flex-direction:column;height:calc(100vh - var(--nav));overflow:hidden}
+  .step-tabs{background:var(--s1);flex-shrink:0}
+  .form-panel{padding-bottom:16px!important}
+  .bottom-bar{display:none!important}
+  .mid-preview-bar{display:flex;align-items:center;padding:10px 14px;background:var(--s1);border-bottom:1.5px solid var(--b1);gap:8px;flex-shrink:0}
+  .mid-preview-bar-title{flex:1;font-size:.82rem;color:var(--t2);font-weight:600}
+  .mid-preview-scroll{flex:1;overflow:auto;display:flex;align-items:flex-start;justify-content:center;padding:24px 16px;background:var(--s2)}
+  .cvsheet-desktop{width:210mm;min-height:297mm;background:#fff;box-shadow:0 8px 50px rgba(0,0,0,.45);flex-shrink:0;direction:ltr}
+  .right-col-body{flex:1;overflow-y:auto;padding:14px}
+  .right-col-foot{padding:12px 14px;border-top:1.5px solid var(--b1);display:flex;gap:7px}
+  .right-col-foot .btn{flex:1}
+  .right-col-hd{padding:12px 16px;border-bottom:1.5px solid var(--b1);display:flex;align-items:center;gap:8px;flex-shrink:0}
+  .right-col-hd-title{font-size:.88rem;font-weight:700;flex:1}
+  .tpl-grid{grid-template-columns:1fr 1fr}
+  .tpl-thumb{height:110px}
+  .tpl-scale{transform:scale(0.157)!important;transform-origin:top left}
+  .design-sheet{display:none!important}
+}
+
+/* ═══════════════════════════════
+   CV TEMPLATE STYLES
+═══════════════════════════════ */
+
+/* T1: ZURICH */
+.t1{font-family:'Segoe UI',Arial,sans-serif;background:#fff;width:210mm;min-height:297mm;overflow:hidden}
+.t1 .accent-bar{height:6px;background:var(--C,#1a6b8a)}
+.t1 .hd{padding:26px 30px 20px;border-bottom:1px solid #e8ecf0;display:flex;align-items:center;gap:20px}
+.t1 .hd-photo{width:86px;height:86px;border-radius:6px;overflow:hidden;flex-shrink:0;border:2px solid #e8ecf0}
+.t1 .hd-photo img{width:100%;height:100%;object-fit:cover;object-position:center top;display:block}
+.t1 .hd-photo .noph{width:100%;height:100%;background:#f0f4f8;display:flex;align-items:center;justify-content:center;font-size:28px}
+.t1 .hd-info{flex:1}
+.t1 .name{font-size:23pt;font-weight:700;color:#111;line-height:1;word-break:break-word;unicode-bidi:plaintext}
+.t1 .jobt{font-size:10pt;color:var(--C,#1a6b8a);margin-top:5px;font-weight:400;unicode-bidi:plaintext}
+.t1 .ct-line{display:flex;flex-wrap:wrap;gap:4px 16px;margin-top:9px}
+.t1 .ct-line .ct{display:flex;align-items:center;gap:5px;font-size:7.5pt;color:#666}
+.t1 .ct-line .ct i{color:var(--C,#1a6b8a);font-size:7pt}
+.t1 .ct-line .ct span{unicode-bidi:plaintext}
+.t1 .body{display:grid;grid-template-columns:1fr 175px}
+.t1 .main{padding:18px 22px 18px 30px;border-left:1px solid #eef0f8;overflow:hidden;min-width:0}
+.t1 .side{padding:18px 18px 18px 14px;overflow:hidden;min-width:0}
+.t1 .sec-h{font-size:7pt;font-weight:800;text-transform:uppercase;color:var(--C,#1a6b8a);border-bottom:1.5px solid var(--C,#1a6b8a);padding-bottom:5px;margin-bottom:10px;margin-top:17px;unicode-bidi:plaintext}
+.t1 .sec-h:first-child{margin-top:0}
+.t1 .sd-h{font-size:7pt;font-weight:800;text-transform:uppercase;color:#aaa;border-bottom:1px solid #eee;padding-bottom:4px;margin-bottom:9px;margin-top:15px;unicode-bidi:plaintext}
+.t1 .sd-h:first-child{margin-top:0}
+.t1 .summary{font-size:8.5pt;line-height:1.75;color:#444;unicode-bidi:plaintext;text-align:justify}
+.t1 .item{margin-bottom:11px;padding-bottom:11px;border-bottom:1px solid #f4f6fb}
+.t1 .item:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0}
+.t1 .i-row{display:flex;justify-content:space-between;align-items:flex-start;gap:6px}
+.t1 .i-title{font-size:9pt;font-weight:700;color:#111;unicode-bidi:plaintext}
+.t1 .i-date{font-size:7pt;color:#fff;background:var(--C,#1a6b8a);padding:2px 7px;border-radius:2px;white-space:nowrap;font-weight:600;flex-shrink:0}
+.t1 .i-sub{font-size:8pt;color:var(--C,#1a6b8a);font-weight:500;margin:2px 0;unicode-bidi:plaintext}
+.t1 .i-desc{font-size:8pt;color:#555;line-height:1.6;margin-top:3px;unicode-bidi:plaintext}
+.t1 .s-ct{display:flex;align-items:flex-start;gap:7px;font-size:7.5pt;color:#555;padding:4px 0;border-bottom:1px solid #f2f5fb;word-break:break-all}
+.t1 .s-ct:last-child{border-bottom:none}
+.t1 .s-ct i{color:var(--C,#1a6b8a);font-size:7pt;width:11px;flex-shrink:0;margin-top:1px}
+.t1 .s-ct span{unicode-bidi:plaintext}
+.t1 .sk-r{margin-bottom:7px}
+.t1 .sk-n{font-size:8pt;color:#333;font-weight:600;margin-bottom:3px;unicode-bidi:plaintext}
+.t1 .sk-b{height:4px;background:#e8ecf5;border-radius:2px;overflow:hidden}
+.t1 .sk-f{height:100%;border-radius:2px;background:var(--C,#1a6b8a)}
+.t1 .tag{display:inline-block;padding:2px 8px;border:1px solid #dde3ee;color:#555;font-size:7.5pt;border-radius:2px;margin:2px 2px 2px 0}
+.t1 .lng-r{display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px solid #f2f5fb;font-size:8pt}
+.t1 .lng-r:last-child{border-bottom:none}
+.t1 .lng-n{color:#333;font-weight:600;unicode-bidi:plaintext}
+.t1 .lng-l{color:#bbb;font-size:7pt}
+.t1 .hobb{font-size:8pt;color:#888;line-height:1.6;unicode-bidi:plaintext}
+
+/* T2: PARIS */
+.t2{font-family:'Segoe UI',Arial,sans-serif;display:flex;width:210mm;min-height:297mm;background:#fff}
+.t2 .side{width:195px;flex-shrink:0;background:var(--C,#1c2e4a);display:flex;flex-direction:column;overflow:hidden}
+.t2 .s-photo{width:195px;height:205px;overflow:hidden;position:relative;flex-shrink:0}
+.t2 .s-photo img{width:100%;height:100%;object-fit:cover;object-position:center top;display:block}
+.t2 .s-photo .noph{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:56px;background:rgba(255,255,255,.06);color:rgba(255,255,255,.2)}
+.t2 .s-photo::after{content:'';position:absolute;bottom:0;left:0;right:0;height:55px;background:linear-gradient(transparent,var(--C,#1c2e4a))}
+.t2 .s-body{padding:14px 15px;flex:1;overflow:hidden}
+.t2 .s-name{font-size:11pt;font-weight:800;color:#fff;line-height:1.2;word-break:break-word;unicode-bidi:plaintext}
+.t2 .s-job{font-size:6.5pt;color:rgba(255,255,255,.42);text-transform:uppercase;margin-top:4px;padding-bottom:12px;border-bottom:1px solid rgba(255,255,255,.08);unicode-bidi:plaintext}
+.t2 .sd-h{font-size:5.5pt;font-weight:900;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:8px;margin-top:13px;unicode-bidi:plaintext}
+.t2 .sd-h:first-child{margin-top:0}
+.t2 .s-ct{display:flex;align-items:flex-start;gap:7px;font-size:7.5pt;color:rgba(255,255,255,.62);padding:3px 0;word-break:break-all}
+.t2 .s-ct i{color:rgba(255,255,255,.28);font-size:7pt;width:11px;flex-shrink:0;margin-top:2px}
+.t2 .s-ct span{unicode-bidi:plaintext}
+.t2 .sk-r{margin-bottom:7px}
+.t2 .sk-n{font-size:7.5pt;color:rgba(255,255,255,.62);margin-bottom:3px;unicode-bidi:plaintext}
+.t2 .sk-b{height:3px;background:rgba(255,255,255,.1);border-radius:2px;overflow:hidden}
+.t2 .sk-f{height:100%;border-radius:2px;background:rgba(255,255,255,.62)}
+.t2 .tag{display:inline-block;padding:2px 7px;background:rgba(255,255,255,.07);color:rgba(255,255,255,.52);font-size:7pt;border:1px solid rgba(255,255,255,.1);margin:2px 2px 2px 0;border-radius:2px}
+.t2 .lng-r{display:flex;justify-content:space-between;padding:3px 0;border-bottom:1px dashed rgba(255,255,255,.07);font-size:7.5pt}
+.t2 .lng-r:last-child{border-bottom:none}
+.t2 .lng-n{color:rgba(255,255,255,.58);unicode-bidi:plaintext}
+.t2 .lng-l{color:rgba(255,255,255,.28);font-size:7pt}
+.t2 .hobb{font-size:7pt;color:rgba(255,255,255,.3);line-height:1.6;unicode-bidi:plaintext}
+.t2 .main{flex:1;display:flex;flex-direction:column;overflow:hidden}
+.t2 .m-top{background:var(--C,#1c2e4a);padding:26px 22px 18px;flex-shrink:0}
+.t2 .m-name{font-size:17.5pt;font-weight:800;color:#fff;word-break:break-word;unicode-bidi:plaintext}
+.t2 .m-job{font-size:9pt;color:rgba(255,255,255,.62);margin-top:4px;unicode-bidi:plaintext;font-style:italic}
+.t2 .m-body{padding:17px 20px;flex:1}
+.t2 .sec-h{font-size:7.5pt;font-weight:800;text-transform:uppercase;color:var(--C,#1c2e4a);border-bottom:2px solid var(--C,#1c2e4a);padding-bottom:4px;margin-bottom:10px;margin-top:17px;unicode-bidi:plaintext}
+.t2 .sec-h:first-child{margin-top:0}
+.t2 .summary{font-size:8.5pt;line-height:1.7;color:#555;unicode-bidi:plaintext;text-align:justify}
+.t2 .item{margin-bottom:11px;padding-bottom:11px;border-bottom:1px solid #f2f5fa}
+.t2 .item:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0}
+.t2 .i-row{display:flex;justify-content:space-between;align-items:flex-start;gap:6px;margin-bottom:2px}
+.t2 .i-title{font-size:9pt;font-weight:700;color:#111;unicode-bidi:plaintext}
+.t2 .i-date{font-size:7pt;background:rgba(28,46,74,.1);color:var(--C,#1c2e4a);padding:2px 7px;border-radius:2px;font-weight:700;white-space:nowrap;flex-shrink:0}
+.t2 .i-sub{font-size:8pt;color:#aaa;margin-bottom:2px;unicode-bidi:plaintext}
+.t2 .i-desc{font-size:8.5pt;color:#555;line-height:1.6;unicode-bidi:plaintext}
+.t2 .chip{display:inline-block;padding:2px 8px;background:rgba(28,46,74,.07);color:var(--C,#1c2e4a);font-size:7pt;border-radius:2px;font-weight:700;margin:2px 2px 2px 0}
+
+/* T3: BERLIN */
+.t3{font-family:'Segoe UI',Arial,sans-serif;background:#fff;width:210mm;min-height:297mm;overflow:hidden}
+.t3 .hd{display:flex;min-height:178px;position:relative}
+.t3 .hd-col{width:188px;flex-shrink:0;background:var(--C,#b91c1c);position:relative;z-index:1;display:flex;align-items:flex-end}
+.t3 .hd-col::after{content:'';position:absolute;top:0;right:-30px;width:62px;height:100%;background:var(--C,#b91c1c);transform:skewX(-5deg);z-index:-1}
+.t3 .hd-photo-blk{width:158px;height:178px;overflow:hidden;border-bottom:4px solid rgba(255,255,255,.28);position:relative;z-index:2;margin:0 auto}
+.t3 .hd-photo-blk img{width:100%;height:100%;object-fit:cover;object-position:center top;display:block}
+.t3 .hd-photo-blk .noph{width:100%;height:100%;background:rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;font-size:50px}
+.t3 .hd-info{flex:1;display:flex;flex-direction:column;justify-content:center;padding:20px 22px 20px 44px;overflow:hidden}
+.t3 .name{font-size:21pt;font-weight:800;color:#111;line-height:1.05;word-break:break-word;unicode-bidi:plaintext;}
+.t3 .jobt{font-size:10pt;color:var(--C,#b91c1c);margin:6px 0 13px;font-weight:400;unicode-bidi:plaintext}
+.t3 .ct-list{display:flex;flex-direction:column;gap:3px}
+.t3 .ct{display:flex;align-items:center;gap:7px;font-size:7.5pt;color:#555}
+.t3 .ct i{color:var(--C,#b91c1c);font-size:7pt;width:12px}
+.t3 .ct span{unicode-bidi:plaintext}
+.t3 .body{display:grid;grid-template-columns:1fr 183px}
+.t3 .main{padding:18px 22px;overflow:hidden;min-width:0;border-left:1px solid #eef0f8}
+.t3 .side{padding:18px 15px;background:#f9fafb;overflow:hidden;min-width:0}
+.t3 .sec-h{font-size:7.5pt;font-weight:800;text-transform:uppercase;color:var(--C,#b91c1c);border-bottom:2px solid var(--C,#b91c1c);padding-bottom:4px;margin-bottom:10px;margin-top:17px;unicode-bidi:plaintext}
+.t3 .sec-h:first-child{margin-top:0}
+.t3 .sd-h{font-size:7pt;font-weight:800;text-transform:uppercase;color:#bbb;border-bottom:1px solid #eee;padding-bottom:4px;margin-bottom:8px;margin-top:14px;unicode-bidi:plaintext}
+.t3 .sd-h:first-child{margin-top:0}
+.t3 .summary{font-size:8.5pt;line-height:1.75;color:#444;unicode-bidi:plaintext;text-align:justify}
+.t3 .item{margin-bottom:11px;padding-bottom:11px;border-bottom:1px solid #f2f4f8}
+.t3 .item:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0}
+.t3 .i-row{display:flex;justify-content:space-between;gap:6px;margin-bottom:2px}
+.t3 .i-title{font-size:9pt;font-weight:700;color:#111;unicode-bidi:plaintext}
+.t3 .i-date{font-size:7pt;color:#bbb;white-space:nowrap}
+.t3 .i-sub{font-size:8pt;color:var(--C,#b91c1c);font-weight:600;margin-bottom:2px;unicode-bidi:plaintext}
+.t3 .i-desc{font-size:8.5pt;color:#555;line-height:1.6;unicode-bidi:plaintext}
+.t3 .s-ct{display:flex;align-items:flex-start;gap:7px;font-size:8pt;color:#555;padding:4px 0;border-bottom:1px solid #eef0f8;word-break:break-all}
+.t3 .s-ct:last-child{border-bottom:none}
+.t3 .s-ct i{color:var(--C,#b91c1c);font-size:7.5pt;width:12px;flex-shrink:0;margin-top:1px}
+.t3 .s-ct span{unicode-bidi:plaintext}
+.t3 .sk-r{margin-bottom:7px}
+.t3 .sk-n{font-size:8pt;font-weight:600;color:#333;margin-bottom:3px;unicode-bidi:plaintext}
+.t3 .sk-b{height:5px;background:#eaedf5;border-radius:3px;overflow:hidden}
+.t3 .sk-f{height:100%;border-radius:3px;background:var(--C,#b91c1c)}
+.t3 .tag{display:inline-block;padding:2px 8px;border:1px solid #e0e4f0;color:#555;font-size:7.5pt;border-radius:2px;margin:2px 2px 2px 0;background:#fff}
+.t3 .lng-r{display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px dashed #eee;font-size:8pt}
+.t3 .lng-r:last-child{border-bottom:none}
+.t3 .lng-n{color:#333;font-weight:600;unicode-bidi:plaintext}
+.t3 .lng-l{color:#bbb;font-size:7pt}
+.t3 .hobb{font-size:8pt;color:#888;line-height:1.6;unicode-bidi:plaintext}
+
+/* T4: LONDON */
+.t4{font-family:'Georgia',serif;background:#fff;width:210mm;min-height:297mm;padding:38px 40px}
+.t4 .hd{display:flex;align-items:center;gap:20px;padding-bottom:20px;border-bottom:2.5px solid #111;margin-bottom:20px}
+.t4 .hd-photo{width:84px;height:84px;border-radius:4px;overflow:hidden;flex-shrink:0;border:1px solid #ddd}
+.t4 .hd-photo img{width:100%;height:100%;object-fit:cover;object-position:center top;display:block}
+.t4 .hd-photo .noph{width:100%;height:100%;background:#f5f5f5;display:flex;align-items:center;justify-content:center;font-size:26px;color:#ccc}
+.t4 .hd-info{flex:1;overflow:hidden}
+.t4 .name{font-size:25pt;font-weight:400;color:#111;line-height:1;word-break:break-word;unicode-bidi:plaintext}
+.t4 .jobt{font-size:10pt;color:var(--C,#1d4ed8);margin:6px 0 9px;font-style:italic;font-family:'Segoe UI',sans-serif;unicode-bidi:plaintext}
+.t4 .ct-row{display:flex;flex-wrap:wrap;gap:3px 15px;font-family:'Segoe UI',sans-serif}
+.t4 .ct-row .ct{display:flex;align-items:center;gap:5px;font-size:7.5pt;color:#888}
+.t4 .ct-row .ct i{color:var(--C,#1d4ed8);font-size:7pt}
+.t4 .ct-row .ct span{unicode-bidi:plaintext}
+.t4 .body{display:grid;grid-template-columns:1fr 162px;gap:0 26px}
+.t4 .main{overflow:hidden;min-width:0}
+.t4 .side{overflow:hidden;min-width:0}
+.t4 .sec-h{font-size:6pt;font-weight:400;text-transform:uppercase;color:var(--C,#1d4ed8);margin-bottom:10px;margin-top:18px;font-family:'Segoe UI',sans-serif;unicode-bidi:plaintext}
+.t4 .sec-h:first-child{margin-top:0}
+.t4 .sd-h{font-size:6pt;font-weight:400;text-transform:uppercase;color:#ccc;margin-bottom:8px;margin-top:16px;font-family:'Segoe UI',sans-serif;unicode-bidi:plaintext}
+.t4 .sd-h:first-child{margin-top:0}
+.t4 .summary{font-size:8.5pt;line-height:1.75;color:#555;unicode-bidi:plaintext}
+.t4 .item{margin-bottom:12px;padding-left:14px;border-left:2px solid #eee;position:relative}
+.t4 .item::before{content:'';position:absolute;left:-5px;top:6px;width:8px;height:8px;border-radius:50%;background:var(--C,#1d4ed8);box-shadow:0 0 0 3px rgba(29,78,216,.1)}
+.t4 .i-row{display:flex;justify-content:space-between;align-items:flex-start;gap:8px;font-family:'Segoe UI',sans-serif}
+.t4 .i-title{font-size:9.5pt;font-weight:700;color:#111;unicode-bidi:plaintext;font-family:'Segoe UI',sans-serif}
+.t4 .i-date{font-size:7pt;color:#ccc;white-space:nowrap;font-family:'Segoe UI',sans-serif}
+.t4 .i-sub{font-size:8pt;color:#aaa;margin:2px 0;font-family:'Segoe UI',sans-serif;unicode-bidi:plaintext}
+.t4 .i-desc{font-size:8.5pt;color:#555;line-height:1.6;margin-top:3px;unicode-bidi:plaintext;font-family:'Segoe UI',sans-serif}
+.t4 .s-ct{display:flex;align-items:flex-start;gap:6px;font-size:7.5pt;color:#666;padding:4px 0;border-bottom:1px solid #f2f2f2;word-break:break-all;font-family:'Segoe UI',sans-serif}
+.t4 .s-ct:last-child{border-bottom:none}
+.t4 .s-ct i{color:var(--C,#1d4ed8);font-size:7pt;width:11px;flex-shrink:0;margin-top:1px}
+.t4 .s-ct span{unicode-bidi:plaintext}
+.t4 .sk-r{margin-bottom:7px;font-family:'Segoe UI',sans-serif}
+.t4 .sk-n{font-size:7.5pt;font-weight:700;color:#444;margin-bottom:3px;unicode-bidi:plaintext}
+.t4 .sk-b{height:2px;background:#eee;overflow:hidden}
+.t4 .sk-f{height:100%;background:var(--C,#1d4ed8)}
+.t4 .tag{display:inline-block;padding:2px 8px;background:#f0f4ff;color:var(--C,#1d4ed8);font-size:7pt;border-radius:2px;margin:2px;font-weight:700;font-family:'Segoe UI',sans-serif}
+.t4 .lng-r{display:flex;justify-content:space-between;font-size:8pt;padding:4px 0;border-bottom:1px solid #f2f2f2;font-family:'Segoe UI',sans-serif}
+.t4 .lng-r:last-child{border-bottom:none}
+.t4 .lng-n{color:#444;font-weight:600;unicode-bidi:plaintext}
+.t4 .lng-l{color:#ccc;font-size:7pt}
+.t4 .hobb{font-size:8pt;color:#aaa;line-height:1.6;unicode-bidi:plaintext;font-family:'Segoe UI',sans-serif}
+
+/* T5: MAROC — Warm terracotta, full-width header, round photo center */
+.t5{font-family:'Segoe UI',Arial,sans-serif;background:#fff;width:210mm;min-height:297mm;overflow:hidden}
+.t5 .hd{background:linear-gradient(160deg,var(--C,#c2410c) 0%,color-mix(in srgb,var(--C,#c2410c) 75%,#000) 100%);padding:30px 30px 0;display:flex;flex-direction:column;align-items:center;position:relative;overflow:hidden}
+.t5 .hd-circles{position:absolute;top:-40px;right:-40px;width:200px;height:200px;border-radius:50%;background:rgba(255,255,255,.06)}
+.t5 .hd-circles2{position:absolute;bottom:-30px;left:-30px;width:140px;height:140px;border-radius:50%;background:rgba(255,255,255,.04)}
+.t5 .hd-photo-ring{width:100px;height:100px;border-radius:50%;border:4px solid rgba(255,255,255,.5);overflow:hidden;box-shadow:0 6px 28px rgba(0,0,0,.35);position:relative;z-index:1;background:#f0f4f8}
+.t5 .hd-photo-ring img{width:100%;height:100%;object-fit:cover;object-position:center top;display:block}
+.t5 .hd-photo-ring .noph{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:38px;background:rgba(255,255,255,.12)}
+.t5 .hd-name{font-size:20pt;font-weight:800;color:#fff;text-align:center;margin-top:10px;line-height:1.1;word-break:break-word;unicode-bidi:plaintext;position:relative;z-index:1}
+.t5 .hd-job{font-size:9.5pt;color:rgba(255,255,255,.75);text-align:center;margin:4px 0 16px;unicode-bidi:plaintext;font-weight:300;position:relative;z-index:1}
+.t5 .hd-cts{display:flex;flex-wrap:wrap;justify-content:center;gap:4px 18px;padding-bottom:18px;position:relative;z-index:1}
+.t5 .hd-ct{display:flex;align-items:center;gap:5px;font-size:7pt;color:rgba(255,255,255,.7)}
+.t5 .hd-ct i{font-size:6.5pt;color:rgba(255,255,255,.5)}
+.t5 .hd-ct span{unicode-bidi:plaintext}
+.t5 .hd-wave{width:100%;height:26px;background:#fff;clip-path:ellipse(58% 100% at 50% 100%);position:relative;z-index:1}
+.t5 .body{display:grid;grid-template-columns:1fr 178px}
+.t5 .main{padding:18px 22px;overflow:hidden;min-width:0}
+.t5 .side{padding:18px 15px;background:#fdf8f5;border-right:1px solid #f0e8e0;overflow:hidden;min-width:0}
+.t5 .sec-h{font-size:7.5pt;font-weight:800;text-transform:uppercase;color:var(--C,#c2410c);border-bottom:2px solid var(--C,#c2410c);padding-bottom:4px;margin-bottom:10px;margin-top:18px;unicode-bidi:plaintext}
+.t5 .sec-h:first-child{margin-top:0}
+.t5 .sd-h{font-size:7pt;font-weight:800;text-transform:uppercase;color:#bbb;border-bottom:1px solid #eee;padding-bottom:4px;margin-bottom:9px;margin-top:15px;unicode-bidi:plaintext}
+.t5 .sd-h:first-child{margin-top:0}
+.t5 .summary{font-size:8.5pt;line-height:1.75;color:#444;unicode-bidi:plaintext;text-align:justify}
+.t5 .item{margin-bottom:11px;padding-bottom:11px;border-bottom:1px solid #f5f0ec}
+.t5 .item:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0}
+.t5 .i-row{display:flex;justify-content:space-between;align-items:flex-start;gap:6px}
+.t5 .i-title{font-size:9pt;font-weight:700;color:#111;unicode-bidi:plaintext}
+.t5 .i-date{font-size:7pt;background:rgba(194,65,12,.1);color:var(--C,#c2410c);padding:2px 7px;border-radius:2px;white-space:nowrap;font-weight:600;flex-shrink:0}
+.t5 .i-sub{font-size:8pt;color:var(--C,#c2410c);font-weight:500;margin:2px 0;unicode-bidi:plaintext}
+.t5 .i-desc{font-size:8pt;color:#555;line-height:1.6;margin-top:3px;unicode-bidi:plaintext}
+.t5 .s-ct{display:flex;align-items:flex-start;gap:7px;font-size:7.5pt;color:#555;padding:4px 0;border-bottom:1px solid #f5f0ec;word-break:break-all}
+.t5 .s-ct:last-child{border-bottom:none}
+.t5 .s-ct i{color:var(--C,#c2410c);font-size:7pt;width:11px;flex-shrink:0;margin-top:1px}
+.t5 .s-ct span{unicode-bidi:plaintext}
+.t5 .sk-r{margin-bottom:7px}
+.t5 .sk-n{font-size:8pt;color:#333;font-weight:600;margin-bottom:3px;unicode-bidi:plaintext}
+.t5 .sk-b{height:6px;background:#f0e8e0;border-radius:3px;overflow:hidden}
+.t5 .sk-f{height:100%;border-radius:3px;background:var(--C,#c2410c)}
+.t5 .tag{display:inline-block;padding:2px 8px;border:1px solid #f0e0d0;color:var(--C,#c2410c);background:rgba(194,65,12,.05);font-size:7.5pt;border-radius:10px;margin:2px 2px 2px 0}
+.t5 .lng-r{display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px solid #f5f0ec;font-size:8pt}
+.t5 .lng-r:last-child{border-bottom:none}
+.t5 .lng-n{color:#333;font-weight:600;unicode-bidi:plaintext}
+.t5 .lng-l{color:#bbb;font-size:7pt}
+.t5 .hobb{font-size:8pt;color:#888;line-height:1.6;unicode-bidi:plaintext}
+
+/* T6: NORDIC — Off-white, left color band, elegant spacing */
+.t6{font-family:'Segoe UI',Arial,sans-serif;background:#fff;width:210mm;min-height:297mm;display:flex;overflow:hidden}
+.t6 .band{width:8px;background:var(--C,#0f766e);flex-shrink:0}
+.t6 .inner{flex:1;display:flex;flex-direction:column;overflow:hidden}
+.t6 .hd{padding:28px 28px 22px;border-bottom:1px solid #e8edf2;display:flex;align-items:center;gap:20px}
+.t6 .hd-photo{width:90px;height:90px;border-radius:50%;overflow:hidden;flex-shrink:0;border:3px solid var(--C,#0f766e);box-shadow:0 3px 16px rgba(0,0,0,.12)}
+.t6 .hd-photo img{width:100%;height:100%;object-fit:cover;object-position:center top;display:block}
+.t6 .hd-photo .noph{width:100%;height:100%;background:#f0f6f5;display:flex;align-items:center;justify-content:center;font-size:30px}
+.t6 .hd-info{flex:1;overflow:hidden}
+.t6 .name{font-size:22pt;font-weight:700;color:#0f1923;line-height:1.05;word-break:break-word;unicode-bidi:plaintext}
+.t6 .jobt{font-size:10pt;color:var(--C,#0f766e);margin:5px 0 11px;font-weight:400;unicode-bidi:plaintext}
+.t6 .ct-line{display:flex;flex-wrap:wrap;gap:4px 16px}
+.t6 .ct{display:flex;align-items:center;gap:5px;font-size:7.5pt;color:#666}
+.t6 .ct i{color:var(--C,#0f766e);font-size:7pt}
+.t6 .ct span{unicode-bidi:plaintext}
+.t6 .body{display:grid;grid-template-columns:1fr 178px;flex:1}
+.t6 .main{padding:18px 22px 18px 28px;overflow:hidden;min-width:0}
+.t6 .side{padding:18px 18px;background:#f6f9f8;border-left:1px solid #e2eeec;overflow:hidden;min-width:0}
+.t6 .sec-h{font-size:7pt;font-weight:800;text-transform:uppercase;color:var(--C,#0f766e);padding-bottom:5px;border-bottom:2px solid var(--C,#0f766e);margin-bottom:10px;margin-top:18px;unicode-bidi:plaintext}
+.t6 .sec-h:first-child{margin-top:0}
+.t6 .sd-h{font-size:7pt;font-weight:800;text-transform:uppercase;color:#bbb;border-bottom:1px solid #e8edf2;padding-bottom:4px;margin-bottom:9px;margin-top:15px;unicode-bidi:plaintext}
+.t6 .sd-h:first-child{margin-top:0}
+.t6 .summary{font-size:8.5pt;line-height:1.75;color:#444;unicode-bidi:plaintext;text-align:justify}
+.t6 .item{margin-bottom:12px;padding-bottom:12px;border-bottom:1px solid #f0f4f2;padding-left:12px;border-left:3px solid var(--C,#0f766e)}
+.t6 .item:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0}
+.t6 .i-row{display:flex;justify-content:space-between;align-items:flex-start;gap:6px}
+.t6 .i-title{font-size:9pt;font-weight:700;color:#0f1923;unicode-bidi:plaintext}
+.t6 .i-date{font-size:7pt;color:#aaa;white-space:nowrap}
+.t6 .i-sub{font-size:8pt;color:var(--C,#0f766e);font-weight:500;margin:2px 0;unicode-bidi:plaintext}
+.t6 .i-desc{font-size:8pt;color:#555;line-height:1.6;margin-top:3px;unicode-bidi:plaintext}
+.t6 .s-ct{display:flex;align-items:flex-start;gap:7px;font-size:7.5pt;color:#555;padding:4px 0;border-bottom:1px solid #e8edf0;word-break:break-all}
+.t6 .s-ct:last-child{border-bottom:none}
+.t6 .s-ct i{color:var(--C,#0f766e);font-size:7pt;width:11px;flex-shrink:0;margin-top:1px}
+.t6 .s-ct span{unicode-bidi:plaintext}
+.t6 .sk-r{margin-bottom:7px}
+.t6 .sk-n{font-size:8pt;color:#333;font-weight:600;margin-bottom:4px;unicode-bidi:plaintext}
+.t6 .sk-dots{display:flex;gap:3px}
+.t6 .sk-dot{width:9px;height:9px;border-radius:50%;background:#e2eeec}
+.t6 .sk-dot.on{background:var(--C,#0f766e)}
+.t6 .tag{display:inline-block;padding:3px 9px;background:#f0f7f6;color:var(--C,#0f766e);font-size:7.5pt;border-radius:10px;margin:2px 2px 2px 0;border:1px solid #cce8e4;font-weight:600}
+.t6 .lng-r{display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid #e8edf0;font-size:8pt;align-items:center}
+.t6 .lng-r:last-child{border-bottom:none}
+.t6 .lng-n{color:#333;font-weight:600;unicode-bidi:plaintext}
+.t6 .lng-l{font-size:6.5pt;background:var(--C,#0f766e);color:#fff;padding:1px 6px;border-radius:8px}
+.t6 .hobb{font-size:8pt;color:#888;line-height:1.6;unicode-bidi:plaintext}
+
+</style>
+<!-- Firebase SDKs (gstatic = بدون حجب على Android) -->
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+</head>
+<body>
+
+<!-- LOADER -->
+<div id="loader">
+  <div class="ld-logo">📄</div>
+  <div class="ld-txt">CV Pro</div>
+  <div class="ld-dots"><div class="ld-dot"></div><div class="ld-dot"></div><div class="ld-dot"></div></div>
+</div>
+
+<!-- ═══ LOGIN ═══ -->
+<div id="pg-login" class="page">
+  <div class="login-wrap">
+    <div class="login-topbar">
+      <div class="lang-sw" id="ls-login">
+        <button onclick="setLang('ar')" class="on">ع</button>
+        <button onclick="setLang('fr')">FR</button>
+        <button onclick="setLang('en')">EN</button>
+      </div>
+      <button class="ib" onclick="toggleTheme()"><i class="fas fa-circle-half-stroke"></i></button>
+    </div>
+    <div class="login-card">
+      <div class="login-logo">📄</div>
+      <div class="login-h1">CV <span>Pro</span></div>
+      <div class="login-sub" data-k="lsub">منصة السيرة الذاتية الاحترافية</div>
+      <div class="feats">
+        <div class="feat"><i class="fas fa-palette"></i><span data-k="lf1">6 قوالب عصرية</span></div>
+        <div class="feat"><i class="fas fa-language"></i><span data-k="lf2">3 لغات</span></div>
+        <div class="feat"><i class="fas fa-file-pdf"></i><span data-k="lf3">PDF احترافي</span></div>
+        <div class="feat"><i class="fas fa-mobile-alt"></i><span data-k="lf4">يعمل على جميع الأجهزة</span></div>
+      </div>
+      <button class="btn-goog" onclick="loginGoogle()">
+        <div class="g-dot"></div><span data-k="lgoogle">تسجيل الدخول بـ Google</span>
+      </button>
+      <div class="login-or" data-k="lor">أو</div>
+      <button class="btn-demo" onclick="loginDemo()">
+        <i class="fas fa-bolt"></i><span data-k="ldemo">تجربة فورية بدون حساب</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ DASHBOARD ═══ -->
+<div id="pg-dash" class="page">
+  <nav class="topnav">
+    <div class="topnav-logo">
+      <div class="topnav-logo-ico">📄</div>
+      CV <span>Pro</span>
+    </div>
+    <div class="topnav-r">
+      <div class="lang-sw" id="ls-dash">
+        <button onclick="setLang('ar')">ع</button>
+        <button onclick="setLang('fr')">FR</button>
+        <button onclick="setLang('en')">EN</button>
+      </div>
+      <button class="ib" onclick="toggleTheme()"><i class="fas fa-circle-half-stroke"></i></button>
+      <!-- صورة المستخدم -->
+      <div id="user-avatar" style="width:32px;height:32px;border-radius:50%;overflow:hidden;border:2px solid var(--ac);cursor:pointer;display:none" onclick="confirmLogout()">
+        <img id="user-photo" src="" style="width:100%;height:100%;object-fit:cover">
+      </div>
+      <button class="ib" id="btn-logout" onclick="confirmLogout()" style="display:none"><i class="fas fa-sign-out-alt"></i></button>
+    </div>
+  </nav>
+  <div class="dash-body">
+    <div class="dash-head">
+      <div>
+        <div class="dash-title" data-k="dtitle">مرحباً 👋<small data-k="dsub">إنشاء وإدارة سيرك الذاتية</small></div>
+      </div>
+      <button class="btn btn-pri btn-sm" onclick="newCV()"><i class="fas fa-plus"></i><span data-k="dnew">سيرة جديدة</span></button>
+    </div>
+    <div class="stats">
+      <div class="stat"><div class="stat-ico s-b"><i class="fas fa-file-alt"></i></div><div><div class="stat-v" id="s-cnt">0</div><div class="stat-l" data-k="s1">سيرة</div></div></div>
+      <div class="stat"><div class="stat-ico s-g"><i class="fas fa-download"></i></div><div><div class="stat-v" id="s-exp">0</div><div class="stat-l" data-k="s3">تحميل</div></div></div>
+      <div class="stat"><div class="stat-ico s-p"><i class="fas fa-palette"></i></div><div><div class="stat-v">6</div><div class="stat-l">قالب</div></div></div>
+    </div>
+    <div id="cv-list"></div>
+  </div>
+</div>
+
+<!-- ═══ BUILDER ═══ -->
+<div id="pg-builder" class="page">
+  <!-- TOP NAV -->
+  <div class="builder-nav">
+    <button class="ib" onclick="goPage('dash')"><i class="fas fa-arrow-right"></i></button>
+    <div class="builder-nav-title" id="b-title">سيرة جديدة</div>
+    <button class="ib mob-only" onclick="openPreview()" title="معاينة"><i class="fas fa-eye"></i></button>
+    <button class="ib mob-only" onclick="openDesign()" title="تصميم"><i class="fas fa-paint-brush"></i></button>
+    <button class="btn btn-pri btn-sm" onclick="saveCV()"><i class="fas fa-save"></i><span class="des-only" data-k="save">حفظ</span></button>
+  </div>
+
+  <div class="builder-body">
+    <!-- LEFT: FORM (always visible on mobile, col on desktop) -->
+    <div class="left-col" id="left-col" style="display:flex;flex-direction:column;flex:1;overflow:hidden">
+      <div class="step-tabs" id="step-tabs"></div>
+      <div class="form-panel" id="form-panel" style="flex:1;overflow-y:auto;padding:16px 14px 100px"></div>
+    </div>
+
+    <!-- MID: PREVIEW (desktop only) -->
+    <div class="mid-col des-only" id="mid-col">
+      <div class="mid-preview-bar">
+        <div class="mid-preview-bar-title"><i class="fas fa-eye" style="color:var(--ac);margin-left:6px"></i>معاينة مباشرة</div>
+        <div class="lang-sw" id="ls-cv">
+          <button onclick="setCVLang('ar')">ع</button>
+          <button onclick="setCVLang('fr')">FR</button>
+          <button onclick="setCVLang('en')">EN</button>
+        </div>
+      </div>
+      <div class="mid-preview-scroll" id="mid-scroll">
+        <div class="cvsheet-desktop" id="cvsheet-desktop"></div>
+      </div>
+    </div>
+
+    <!-- RIGHT: DESIGN (desktop only) -->
+    <div class="right-col des-only" id="right-col">
+      <div class="right-col-hd">
+        <i class="fas fa-paint-brush" style="color:var(--ac)"></i>
+        <div class="right-col-hd-title">التصميم</div>
+      </div>
+      <div class="right-col-body" id="design-body-desktop"></div>
+      <div class="right-col-foot">
+        <button class="btn btn-pri btn-sm" onclick="startExport('pdf')"><i class="fas fa-file-pdf"></i>PDF</button>
+        <button class="btn btn-ghost btn-sm" onclick="startExport('png')"><i class="fas fa-image"></i>PNG</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- BOTTOM BAR (mobile) -->
+  <div class="bottom-bar mob-only">
+    <button class="btn btn-ghost" onclick="openPreview()"><i class="fas fa-eye"></i>معاينة</button>
+    <button class="btn btn-ghost" onclick="startExport('png')"><i class="fas fa-image"></i>PNG</button>
+    <button class="btn btn-pri" onclick="startExport('pdf')"><i class="fas fa-file-pdf"></i>PDF</button>
+  </div>
+</div>
+
+<!-- ═══ PREVIEW MODAL (mobile fullscreen) ═══ -->
+<div class="preview-modal" id="preview-modal">
+  <div class="preview-topbar">
+    <button class="ib ib-sm" onclick="closePreview()"><i class="fas fa-arrow-right"></i></button>
+    <div class="preview-topbar-title">معاينة السيرة</div>
+    <div class="lang-sw" id="ls-cv-mob">
+      <button onclick="setCVLang('ar')">ع</button>
+      <button onclick="setCVLang('fr')">FR</button>
+      <button onclick="setCVLang('en')">EN</button>
+    </div>
+  </div>
+  <div class="preview-scroll" id="preview-scroll" style="flex:1;overflow:auto;-webkit-overflow-scrolling:touch;padding:16px;display:flex;justify-content:center">
+    <div id="preview-sheet-wrap"></div>
+  </div>
+  <div class="preview-bottom">
+    <button class="btn btn-pri" onclick="startExport('pdf')"><i class="fas fa-file-pdf"></i>PDF</button>
+    <button class="btn btn-ghost" onclick="startExport('png')"><i class="fas fa-image"></i>PNG</button>
+    <button class="btn btn-ghost" onclick="openDesign()"><i class="fas fa-paint-brush"></i>تصميم</button>
+    <button class="btn btn-ghost btn-sm" onclick="closePreview()"><i class="fas fa-times"></i></button>
+  </div>
+</div>
+
+<!-- ═══ DESIGN SHEET (mobile slide-up) ═══ -->
+<div class="design-sheet" id="design-sheet">
+  <div class="design-overlay" onclick="closeDesign()"></div>
+  <div class="design-panel">
+    <div class="design-handle"></div>
+    <div class="design-head">
+      <i class="fas fa-paint-brush" style="color:var(--ac)"></i>
+      <div class="design-title">التصميم</div>
+      <button class="ib ib-sm" onclick="closeDesign()"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="design-body" id="design-body-mob"></div>
+  </div>
+</div>
+
+<!-- CROP MODAL -->
+<div class="modal-ov" id="crop-modal">
+  <div class="modal-card">
+    <div class="modal-hd">
+      <i class="fas fa-crop-alt" style="color:var(--ac)"></i>
+      <div class="modal-hd-title">قص الصورة</div>
+      <button class="ib ib-sm" onclick="closeCrop()"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="modal-bd">
+      <canvas id="crop-canvas" width="320" height="260"></canvas>
+      <div class="crop-ctrl">
+        <i class="fas fa-search-minus" style="color:var(--t3)"></i>
+        <input type="range" id="crop-zoom" min="50" max="300" value="100" oninput="cropUpd()">
+        <i class="fas fa-search-plus" style="color:var(--t3)"></i>
+        <div class="crop-preview-ring"><canvas id="crop-prev" width="80" height="80"></canvas></div>
+      </div>
+    </div>
+    <div class="modal-ft">
+      <button class="btn btn-ghost btn-sm" onclick="closeCrop()">إلغاء</button>
+      <button class="btn btn-pri btn-sm" onclick="cropApply()"><i class="fas fa-check"></i>تطبيق</button>
+    </div>
+  </div>
+</div>
+
+<!-- CONFIRM MODAL -->
+<div class="modal-ov" id="confirm-modal">
+  <div class="confirm-card">
+    <div class="confirm-ico" id="cm-ico">⚠️</div>
+    <div class="confirm-title" id="cm-title"></div>
+    <div class="confirm-msg" id="cm-msg"></div>
+    <div class="confirm-btns">
+      <button class="btn btn-ghost btn-sm" onclick="closeConfirm()">إلغاء</button>
+      <button class="btn btn-red btn-sm" id="cm-ok">تأكيد</button>
+    </div>
+  </div>
+</div>
+
+<!-- DOWNLOAD OVERLAY -->
+<div class="dl-overlay" id="dl-overlay">
+  <div class="dl-spinner"></div>
+  <div class="dl-txt" id="dl-txt">جاري التحضير...</div>
+  <div class="dl-sub">الرجاء الانتظار</div>
+</div>
+
+<input type="file" id="inp-photo" accept="image/*" onchange="openCrop(event)">
+
+<script>
+/* ═══ STATE ═══ */
+let LANG='ar', THEME='dark', CVS=[], CID=null, CSTEP=0;
+let EXP = +localStorage.getItem('cvpro_exp')||0;
+let D = blank();
+
+function blank(){return{_id:null,_title:'',name:'',job:'',email:'',phone:'',addr:'',web:'',summary:'',hobbies:'',photo:'',skills:[],soft:[],langs:[],exp:[],edu:[],proj:[],tpl:1,color:'#1a6b8a',cvLang:'fr'}}
+
+/* ═══ TRANSLATIONS ═══ */
+const TR={
+ar:{lsub:'منصة السيرة الذاتية الاحترافية',lf1:'6 قوالب عصرية',lf2:'3 لغات',lf3:'PDF احترافي',lf4:'يعمل على جميع الأجهزة',lgoogle:'تسجيل الدخول بـ Google',lor:'أو',ldemo:'تجربة فورية بدون حساب',dtitle:'مرحباً 👋',dsub:'إنشاء وإدارة سيرك الذاتية',dnew:'سيرة جديدة',s1:'سيرة',s3:'تحميل',save:'حفظ',
+  st:['الشخصية','الخبرات','التعليم','المهارات','المشاريع'],
+  ph:'الصورة',phtitle:'انقر لرفع صورة',phsub:'JPG, PNG',chph:'تغيير',rmph:'حذف',
+  fn:'الاسم الكامل',job:'المنصب / التخصص',email:'البريد الإلكتروني',phone:'الهاتف',addr:'العنوان',web:'الموقع / LinkedIn',summary:'الملخص الشخصي',hobby:'الهوايات',
+  skills:'المهارات التقنية',soft:'المهارات الشخصية',langs:'اللغات',askill:'أضف مهارة...',asoft:'أضف...',alang:'إضافة',
+  exp:'الخبرة المهنية',edu:'التعليم',proj:'المشاريع',pos:'المنصب',company:'الشركة',dates:'التاريخ',desc:'الوصف',degree:'الشهادة',school:'المدرسة/الجامعة',pname:'اسم المشروع',plink:'الرابط',additem:'+ إضافة',
+  tpls:'القوالب',colors:'الألوان',clabel:'لون مخصص',cvlanglabel:'لغة السيرة',
+  cv:{summary:'الملخص',exp:'الخبرة',edu:'التعليم',skills:'المهارات',soft:'الكفاءات',langs:'اللغات',hobby:'الهوايات',proj:'المشاريع',contact:'معلومات الاتصال'}},
+fr:{lsub:'Plateforme CV professionnel',lf1:'6 modèles',lf2:'3 langues',lf3:'Export PDF',lf4:'Responsive',lgoogle:'Continuer avec Google',lor:'ou',ldemo:'Essai sans compte',dtitle:'Bonjour 👋',dsub:'Créez vos CV',dnew:'Nouveau CV',s1:'CV',s3:'Export',save:'Sauvegarder',
+  st:['Personnel','Expériences','Formation','Compétences','Projets'],
+  ph:'Photo',phtitle:'Cliquez pour uploader',phsub:'JPG, PNG',chph:'Changer',rmph:'Supprimer',
+  fn:'Nom complet',job:'Poste',email:'Email',phone:'Téléphone',addr:'Adresse',web:'Site / LinkedIn',summary:'Résumé',hobby:'Loisirs',
+  skills:'Compétences',soft:'Soft skills',langs:'Langues',askill:'Ajouter...',asoft:'Ajouter...',alang:'Ajouter',
+  exp:'Expérience',edu:'Formation',proj:'Projets',pos:'Poste',company:'Entreprise',dates:'Période',desc:'Description',degree:'Diplôme',school:'École',pname:'Projet',plink:'Lien',additem:'+ Ajouter',
+  tpls:'Modèles',colors:'Couleurs',clabel:'Couleur personnalisée',cvlanglabel:'Langue du CV',
+  cv:{summary:'Résumé',exp:'Expérience',edu:'Formation',skills:'Compétences',soft:'Soft skills',langs:'Langues',hobby:'Loisirs',proj:'Projets',contact:'Contact'}},
+en:{lsub:'Professional Resume Builder',lf1:'6 templates',lf2:'3 languages',lf3:'PDF export',lf4:'Responsive',lgoogle:'Continue with Google',lor:'or',ldemo:'Try without account',dtitle:'Hello 👋',dsub:'Create your resumes',dnew:'New CV',s1:'CVs',s3:'Downloads',save:'Save',
+  st:['Personal','Experience','Education','Skills','Projects'],
+  ph:'Photo',phtitle:'Click to upload',phsub:'JPG, PNG',chph:'Change',rmph:'Remove',
+  fn:'Full Name',job:'Position',email:'Email',phone:'Phone',addr:'Address',web:'Website / LinkedIn',summary:'Summary',hobby:'Hobbies',
+  skills:'Skills',soft:'Soft Skills',langs:'Languages',askill:'Add skill...',asoft:'Add...',alang:'Add',
+  exp:'Experience',edu:'Education',proj:'Projects',pos:'Position',company:'Company',dates:'Period',desc:'Description',degree:'Degree',school:'School',pname:'Project',plink:'Link',additem:'+ Add',
+  tpls:'Templates',colors:'Colors',clabel:'Custom color',cvlanglabel:'CV Language',
+  cv:{summary:'Summary',exp:'Experience',edu:'Education',skills:'Skills',soft:'Soft Skills',langs:'Languages',hobby:'Hobbies',proj:'Projects',contact:'Contact'}}
+};
+const T=()=>TR[LANG];
+const L=k=>TR[D.cvLang]?.cv?.[k]||TR.fr.cv[k]||k;
+
+const TPLS=[
+  {id:1,name:{ar:'زيورخ',fr:'Zurich',en:'Zurich'}},
+  {id:2,name:{ar:'باريس',fr:'Paris',en:'Paris'}},
+  {id:3,name:{ar:'برلين',fr:'Berlin',en:'Berlin'}},
+  {id:4,name:{ar:'لندن',fr:'London',en:'London'}},
+  {id:5,name:{ar:'مراكش',fr:'Marrakech',en:'Marrakech'}},
+  {id:6,name:{ar:'نورديك',fr:'Nordic',en:'Nordic'}},
+];
+const COLORS=['#1a6b8a','#1e3a8a','#6d28d9','#b91c1c','#0e7490','#b45309','#065f46','#1d4ed8','#7c3aed','#0f766e','#1c2e4a','#111827'];
+
+const isMob=()=>window.innerWidth<900;
+
+/* ═══ LANG / THEME ═══ */
+window.setLang=function(l){
+  LANG=l;
+  document.querySelectorAll('.lang-sw button').forEach(b=>{
+    const v=b.textContent.trim();
+    b.classList.toggle('on',v===l||(v==='ع'&&l==='ar'));
+  });
+  document.querySelectorAll('[data-k]').forEach(el=>{
+    const v=T()[el.dataset.k];
+    if(v&&typeof v==='string')el.textContent=v;
+  });
+  document.documentElement.lang=l;
+  document.documentElement.dir=l==='ar'?'rtl':'ltr';
+  if(document.getElementById('step-tabs').children.length)renderStepTabs();
+};
+
+window.toggleTheme=function(){
+  THEME=THEME==='dark'?'light':'dark';
+  document.documentElement.toggleAttribute('data-lt',THEME==='light');
+};
+
+/* ═══ PAGES ═══ */
+window.goPage=function(id){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('on'));
+  document.getElementById('pg-'+id)?.classList.add('on');
+  if(id==='dash')loadDash();
+  if(id==='builder'){renderAll();}
+};
+window.loginDemo=function(){
+  fbUser = null; // وضع تجريبي بدون حساب
+  CVS = JSON.parse(localStorage.getItem('cvpro_cvs')||'[]');
+  goPage('dash');
+};
+
+/* ═══ DASHBOARD ═══ */
+/* loadDash, saveCV, saveCVS, doDel → replaced by Firebase versions above */
+function renderDash(){
+  if(!CVS.length){
+    el.innerHTML=`<div class="empty"><i class="fas fa-file-alt"></i><h3>لا توجد سيرة بعد</h3><p>ابدأ بإنشاء سيرتك الأولى</p></div>`;return;
+  }
+  el.innerHTML=`<div class="cv-grid">${CVS.map(cv=>`
+    <div class="cv-card">
+      <div class="cv-thumb"><div class="cv-inner">${buildCV(cv)}</div></div>
+      <div class="cv-meta">
+        <div class="cv-name">${cv._title||cv.name||'بدون عنوان'}</div>
+        <div class="cv-date">${cv._date||''}</div>
+        <div class="cv-acts">
+          <button class="btn btn-xs btn-pri" onclick="editCV('${cv._id}')"><i class="fas fa-edit"></i></button>
+          <button class="btn btn-xs btn-ghost" onclick="dupCV('${cv._id}')"><i class="fas fa-copy"></i></button>
+          <button class="btn btn-xs btn-red" onclick="askDel('${cv._id}')"><i class="fas fa-trash"></i></button>
+        </div>
+      </div>
+    </div>`).join('')}
+    <div class="new-card" onclick="newCV()"><i class="fas fa-plus"></i><span>${T().dnew}</span></div>
+  </div>`;
+}
+window.newCV=function(){D=blank();CID=null;document.getElementById('b-title').textContent=T().dnew;goPage('builder')};
+window.editCV=function(id){const cv=CVS.find(c=>c._id===id);if(!cv)return;D={...cv};CID=id;document.getElementById('b-title').textContent=cv._title||cv.name||'';goPage('builder')};
+window.dupCV=function(id){const cv=CVS.find(c=>c._id===id);if(!cv)return;const n={...JSON.parse(JSON.stringify(cv)),_id:'L'+Date.now(),_title:(cv._title||'')+'(2)',_date:new Date().toLocaleDateString()};CVS.push(n);saveCVS();loadDash()};
+window.askDel=function(id){showConfirm('🗑️','حذف السيرة','هل أنت متأكد؟',()=>doDel(id))};
+/* doDel → Firebase */
+/* saveCVS → Firebase */
+
+/* ═══ BUILDER ═══ */
+function renderAll(){
+  renderStepTabs();
+  goStep(0);
+  renderDesignPanel('design-body-desktop');
+  renderDesignPanel('design-body-mob');
+  renderCV();
+}
+
+/* STEP TABS */
+function renderStepTabs(){
+  const el=document.getElementById('step-tabs');if(!el)return;
+  el.innerHTML=T().st.map((s,i)=>`<div class="stab ${CSTEP===i?'on':''}" onclick="goStep(${i})">${s}</div>`).join('');
+}
+window.goStep=function(i){CSTEP=i;renderStepTabs();renderFormPanel()};
+
+/* FORM PANEL */
+function renderFormPanel(){
+  const el=document.getElementById('form-panel');if(!el)return;
+  const t=T();
+  if(CSTEP===0)el.innerHTML=renderStep0(t);
+  else if(CSTEP===1)el.innerHTML=renderRepStep('exp',t.exp,t,[['pos',t.pos],['company',t.company],['dates',t.dates],['desc',t.desc]]);
+  else if(CSTEP===2)el.innerHTML=renderRepStep('edu',t.edu,t,[['degree',t.degree],['school',t.school],['dates',t.dates],['desc',t.desc]]);
+  else if(CSTEP===3)el.innerHTML=renderStep3(t);
+  else if(CSTEP===4)el.innerHTML=renderRepStep('proj',t.proj,t,[['name',t.pname],['link',t.plink],['desc',t.desc]]);
+  if(CSTEP===3){renderSkillTags();renderLangsUI();}
+}
+
+function renderStep0(t){return`
+<div class="fld">
+  <label>${t.ph}</label>
+  <div class="photo-box ${D.photo?'filled':''}" onclick="${D.photo?'':'document.getElementById(\'inp-photo\').click()'}" id="photo-box">
+    ${D.photo
+      ?`<img src="${D.photo}"><div class="photo-actions"><button class="btn btn-xs btn-ghost" onclick="document.getElementById('inp-photo').click();event.stopPropagation()"><i class="fas fa-camera"></i> ${t.chph}</button><button class="btn btn-xs btn-red" onclick="removePhoto();event.stopPropagation()"><i class="fas fa-trash"></i></button></div>`
+      :`<div class="photo-empty"><div class="photo-empty-ico">📷</div><div class="photo-empty-txt">${t.phtitle}</div><div class="photo-empty-sub">${t.phsub}</div></div>`}
+  </div>
+</div>
+<div class="fld"><label>${t.fn}</label><input value="${esc(D.name)}" oninput="D.name=this.value;dr()" placeholder="محمد علي"></div>
+<div class="fld"><label>${t.job}</label><input value="${esc(D.job)}" oninput="D.job=this.value;dr()" placeholder="مهندس برمجيات"></div>
+<div class="fld-2">
+  <div class="fld"><label>${t.email}</label><input value="${esc(D.email)}" oninput="D.email=this.value;dr()" type="email"></div>
+  <div class="fld"><label>${t.phone}</label><input value="${esc(D.phone)}" oninput="D.phone=this.value;dr()" type="tel"></div>
+</div>
+<div class="fld"><label>${t.addr}</label><input value="${esc(D.addr)}" oninput="D.addr=this.value;dr()"></div>
+<div class="fld"><label>${t.web}</label><input value="${esc(D.web)}" oninput="D.web=this.value;dr()"></div>
+<div class="fld"><label>${t.summary}</label><textarea oninput="D.summary=this.value;dr()">${esc(D.summary)}</textarea></div>
+<div class="fld"><label>${t.hobby}</label><textarea oninput="D.hobbies=this.value;dr()" style="min-height:60px">${esc(D.hobbies)}</textarea></div>`}
+
+function renderStep3(t){return`
+<div class="fld"><label>${t.skills}</label>
+  <div class="tags-wrap" id="sk-list"></div>
+  <div class="tag-input-row"><input id="inp-sk" placeholder="${t.askill}" onkeydown="if(event.key==='Enter'){addSk();event.preventDefault()}"><button class="btn btn-xs btn-pri" onclick="addSk()"><i class="fas fa-plus"></i></button></div>
+</div>
+<div class="fld" style="margin-top:14px"><label>${t.soft}</label>
+  <div class="tags-wrap" id="sf-list"></div>
+  <div class="tag-input-row"><input id="inp-sf" placeholder="${t.asoft}" onkeydown="if(event.key==='Enter'){addSf();event.preventDefault()}"><button class="btn btn-xs btn-pri" onclick="addSf()"><i class="fas fa-plus"></i></button></div>
+</div>
+<div class="fld" style="margin-top:14px"><label>${t.langs}</label>
+  <div id="lng-list"></div>
+  <button class="btn btn-xs btn-ghost" style="margin-top:6px" onclick="addLng()"><i class="fas fa-plus"></i> ${t.alang}</button>
+</div>`}
+
+function renderRepStep(type,title,t,fields){
+  const items=D[type]||[];
+  return`<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
+    <span style="font-size:.85rem;font-weight:700">${title}</span>
+    <button class="btn btn-xs btn-pri" onclick="addItem('${type}')"><i class="fas fa-plus"></i> ${t.additem}</button>
+  </div>
+  <div id="${type}-list">${items.map((it,i)=>`
+    <div class="rep-item">
+      <div class="rep-hd" onclick="toggleRep('${type}',${i})">
+        <i class="fas fa-grip-vertical" style="color:var(--t3);font-size:10px"></i>
+        <span class="rep-lbl">${it.pos||it.degree||it.name||'—'}</span>
+        <i class="fas fa-chevron-down rep-arrow" id="ra-${type}-${i}"></i>
+        <button class="ib ib-sm" onclick="rmItem('${type}',${i});event.stopPropagation()"><i class="fas fa-trash" style="font-size:10px;color:var(--acr)"></i></button>
+      </div>
+      <div class="rep-body" id="rb-${type}-${i}">
+        ${fields.map(([k,lbl])=>`<div class="fld"><label>${lbl}</label>${k==='desc'?`<textarea oninput="updItem('${type}',${i},'${k}',this.value)">${esc(it[k]||'')}</textarea>`:`<input value="${esc(it[k]||'')}" oninput="updItem('${type}',${i},'${k}',this.value)">`}</div>`).join('')}
+      </div>
+    </div>`).join('')}
+  </div>`;
+}
+
+function esc(s){return(s||'').replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;')}
+
+window.addItem=function(type){D[type].push({});renderFormPanel()};
+window.rmItem=function(type,i){D[type].splice(i,1);renderFormPanel();dr()};
+window.toggleRep=function(type,i){
+  const b=document.getElementById(`rb-${type}-${i}`);
+  const a=document.getElementById(`ra-${type}-${i}`);
+  if(b){b.classList.toggle('open');if(a)a.style.transform=b.classList.contains('open')?'rotate(180deg)':''}
+};
+window.updItem=function(type,i,k,v){if(D[type][i])D[type][i][k]=v;dr()};
+window.addSk=function(){const i=document.getElementById('inp-sk');if(!i?.value.trim())return;D.skills.push(i.value.trim());i.value='';renderSkillTags();dr()};
+window.addSf=function(){const i=document.getElementById('inp-sf');if(!i?.value.trim())return;D.soft.push(i.value.trim());i.value='';renderSkillTags();dr()};
+window.rmTag=function(arr,i){D[arr].splice(i,1);renderSkillTags();dr()};
+function renderSkillTags(){
+  const sl=document.getElementById('sk-list'),fl=document.getElementById('sf-list');
+  if(sl)sl.innerHTML=D.skills.map((s,i)=>`<div class="t-chip">${s}<button onclick="rmTag('skills',${i})">✕</button></div>`).join('');
+  if(fl)fl.innerHTML=D.soft.map((s,i)=>`<div class="t-chip">${s}<button onclick="rmTag('soft',${i})">✕</button></div>`).join('');
+}
+window.addLng=function(){D.langs.push({l:'',lv:'Débutant'});renderLangsUI();dr()};
+window.rmLng=function(i){D.langs.splice(i,1);renderLangsUI();dr()};
+window.updLng=function(i,k,v){if(D.langs[i])D.langs[i][k]=v;dr()};
+function renderLangsUI(){
+  const el=document.getElementById('lng-list');if(!el)return;
+  const lvls=['Débutant','Élémentaire','Intermédiaire','Avancé','Courant','Bilingue','Natif'];
+  el.innerHTML=D.langs.map((l,i)=>`<div class="lang-row">
+    <input value="${l.l||''}" oninput="updLng(${i},'l',this.value)" placeholder="Français">
+    <select onchange="updLng(${i},'lv',this.value)">${lvls.map(v=>`<option${v===l.lv?' selected':''}>${v}</option>`).join('')}</select>
+    <button class="ib ib-sm" onclick="rmLng(${i})"><i class="fas fa-trash" style="font-size:10px;color:var(--acr)"></i></button>
+  </div>`).join('');
+}
+
+/* DESIGN PANEL */
+function renderDesignPanel(id){
+  const el=document.getElementById(id);if(!el)return;
+  el.innerHTML=`
+  <div class="dsec-label">${T().tpls||'القوالب'}</div>
+  <div class="tpl-grid">${TPLS.map(tp=>`
+    <div class="tpl-card ${D.tpl===tp.id?'on':''}" onclick="pickTpl(${tp.id},'${id}')">
+      <div class="tpl-thumb"><div class="tpl-scale">${buildCV({...D,tpl:tp.id})}</div></div>
+      <div class="tpl-lbl">${tp.name[LANG]||tp.name.fr}</div>
+    </div>`).join('')}
+  </div>
+  <div class="dsec-label" style="margin-top:18px">${T().colors||'الألوان'}</div>
+  <div class="color-dots">${COLORS.map(c=>`<div class="cdot ${D.color===c?'on':''}" style="background:${c}" onclick="pickColor('${c}')"></div>`).join('')}</div>
+  <div class="color-custom-row">
+    <input type="color" id="cc-${id}" value="${D.color}" onchange="pickColor(this.value)">
+    <span>${T().clabel||'لون مخصص'}</span>
+  </div>
+  <div class="dsec-label" style="margin-top:14px">${T().cvlanglabel||'لغة السيرة'}</div>
+  <div class="cvlang-row">
+    <button class="cvlang-btn ${D.cvLang==='ar'?'on':''}" onclick="setCVLang('ar')">العربية</button>
+    <button class="cvlang-btn ${D.cvLang==='fr'?'on':''}" onclick="setCVLang('fr')">Français</button>
+    <button class="cvlang-btn ${D.cvLang==='en'?'on':''}" onclick="setCVLang('en')">English</button>
+  </div>`;
+}
+window.pickTpl=function(id,panelId){D.tpl=id;renderDesignPanel('design-body-desktop');renderDesignPanel('design-body-mob');renderCV()};
+window.pickColor=function(c){D.color=c;renderDesignPanel('design-body-desktop');renderDesignPanel('design-body-mob');renderCV()};
+window.setCVLang=function(l){
+  D.cvLang=l;
+  document.querySelectorAll('.cvlang-btn').forEach(b=>{
+    b.classList.toggle('on',(b.textContent.includes('العربية')&&l==='ar')||(b.textContent.includes('Français')&&l==='fr')||(b.textContent.includes('English')&&l==='en'));
+  });
+  renderCV();
+};
+
+/* ═══ PREVIEW ═══ */
+function renderCV(){
+  const html=buildCV(D);
+  // Desktop sheet
+  const d=document.getElementById('cvsheet-desktop');
+  if(d){
+    d.innerHTML=html;
+    d.style.cssText='width:210mm;min-height:297mm;background:#fff;box-shadow:0 8px 50px rgba(0,0,0,.45);direction:ltr;flex-shrink:0';
+  }
+  // Update mobile preview if it's open
+  if(document.getElementById('preview-modal').classList.contains('open')){
+    renderMobPreview();
+  }
+}
+
+function renderMobPreview(){
+  const wrap=document.getElementById('preview-sheet-wrap');if(!wrap)return;
+  // Calculate scale to fit viewport width with padding
+  const vw=Math.min(window.innerWidth,600)-32; // max 600px, 16px padding each side
+  const A4_W=794; // px equivalent of 210mm at 96dpi
+  const scale=vw/A4_W;
+  const A4_H=1123; // px equivalent of 297mm
+  const scaledH=A4_H*scale;
+  wrap.innerHTML=`
+    <div style="width:${A4_W}px;min-height:${A4_H}px;background:#fff;direction:ltr;
+      transform:scale(${scale.toFixed(4)});transform-origin:top left;
+      box-shadow:0 4px 32px rgba(0,0,0,.5)">
+      ${buildCV(D)}
+    </div>`;
+  // Set wrap height to match scaled content so scroll works
+  wrap.style.height = scaledH + 'px';
+  wrap.style.width = vw + 'px';
+  wrap.style.position = 'relative';
+}
+
+let _rt=null;
+function dr(){clearTimeout(_rt);_rt=setTimeout(renderCV,120)}
+
+window.openPreview=function(){
+  document.getElementById('preview-modal').classList.add('open');
+  renderMobPreview();
+};
+window.closePreview=function(){document.getElementById('preview-modal').classList.remove('open')};
+window.openDesign=function(){document.getElementById('design-sheet').classList.add('open')};
+window.closeDesign=function(){document.getElementById('design-sheet').classList.remove('open')};
+
+/* ═══ SAVE ═══ */
+/* saveCV → Firebase */
+
+/* ═══ PHOTO / CROP ═══ */
+let _cImg=null,_cX=0,_cY=0,_cZ=1,_cDrag=false,_cMX=0,_cMY=0;
+window.openCrop=function(e){
+  const f=e.target.files[0];if(!f)return;
+  const r=new FileReader();
+  r.onload=ev=>{
+    _cImg=new Image();_cImg.onload=()=>{
+      _cX=0;_cY=0;_cZ=1;document.getElementById('crop-zoom').value=100;
+      document.getElementById('crop-modal').classList.add('open');
+      drawCrop();
+    };_cImg.src=ev.target.result;
+  };r.readAsDataURL(f);e.target.value='';
+};
+function drawCrop(){
+  const cv=document.getElementById('crop-canvas'),ctx=cv.getContext('2d');
+  const W=320,H=260,r=Math.min(W,H)/2-10;
+  ctx.clearRect(0,0,W,H);
+  if(_cImg){
+    const s=_cZ*Math.min(W/_cImg.width,H/_cImg.height);
+    const iw=_cImg.width*s,ih=_cImg.height*s;
+    ctx.drawImage(_cImg,W/2+_cX-iw/2,H/2+_cY-ih/2,iw,ih);
+  }
+  ctx.fillStyle='rgba(0,0,0,.6)';
+  ctx.beginPath();ctx.rect(0,0,W,H);ctx.arc(W/2,H/2,r,0,Math.PI*2,true);ctx.fill('evenodd');
+  ctx.strokeStyle='rgba(79,124,255,.8)';ctx.lineWidth=2;ctx.beginPath();ctx.arc(W/2,H/2,r,0,Math.PI*2);ctx.stroke();
+  const pc=document.getElementById('crop-prev'),pctx=pc.getContext('2d');
+  pctx.clearRect(0,0,80,80);pctx.save();pctx.beginPath();pctx.arc(40,40,40,0,Math.PI*2);pctx.clip();
+  pctx.drawImage(cv,W/2-r,H/2-r,r*2,r*2,0,0,80,80);pctx.restore();
+}
+window.cropUpd=function(){_cZ=+document.getElementById('crop-zoom').value/100;drawCrop()};
+document.addEventListener('DOMContentLoaded',()=>{
+  const c=document.getElementById('crop-canvas');
+  c.addEventListener('mousedown',e=>{_cDrag=true;_cMX=e.offsetX;_cMY=e.offsetY});
+  c.addEventListener('mousemove',e=>{if(!_cDrag)return;_cX+=e.offsetX-_cMX;_cY+=e.offsetY-_cMY;_cMX=e.offsetX;_cMY=e.offsetY;drawCrop()});
+  c.addEventListener('mouseup',()=>_cDrag=false);c.addEventListener('mouseleave',()=>_cDrag=false);
+  c.addEventListener('touchstart',e=>{_cDrag=true;const t=e.touches[0];_cMX=t.clientX;_cMY=t.clientY},{passive:true});
+  c.addEventListener('touchmove',e=>{if(!_cDrag)return;const t=e.touches[0];_cX+=t.clientX-_cMX;_cY+=t.clientY-_cMY;_cMX=t.clientX;_cMY=t.clientY;drawCrop()},{passive:true});
+  c.addEventListener('touchend',()=>_cDrag=false);
+});
+window.cropApply=function(){
+  const cv=document.getElementById('crop-canvas');
+  const W=320,H=260,r=Math.min(W,H)/2-10;
+  const out=document.createElement('canvas');out.width=320;out.height=320;
+  const ctx=out.getContext('2d');ctx.save();ctx.beginPath();ctx.arc(160,160,160,0,Math.PI*2);ctx.clip();
+  ctx.drawImage(cv,W/2-r,H/2-r,r*2,r*2,0,0,320,320);ctx.restore();
+  D.photo=out.toDataURL('image/jpeg',.92);
+  closeCrop();renderFormPanel();dr();
+};
+window.closeCrop=function(){document.getElementById('crop-modal').classList.remove('open')};
+window.removePhoto=function(){D.photo='';renderFormPanel();dr()};
+
+/* ═══════════════════════════════════════════════
+   EXPORT — يعمل 100% بدون إنترنت وبدون مكتبات
+   الاستراتيجية:
+   - PDF  → فتح نافذة طباعة مع @page CSS مُحسَّن
+   - PNG  → رسم السيرة على Canvas مباشرة
+═══════════════════════════════════════════════ */
+
+function hideDL(){ document.getElementById('dl-overlay').classList.remove('open'); }
+function showDL(txt){
+  document.getElementById('dl-overlay').classList.add('open');
+  document.getElementById('dl-txt').textContent = txt || 'جاري التحضير...';
+}
+
+/* جمع كل CSS من الصفحة */
+function collectCSS(){
+  return Array.from(document.querySelectorAll('style'))
+    .map(s => s.textContent).join('\n');
+}
+
+/* بناء HTML كامل للسيرة مع كل الأنماط مضمّنة */
+function buildFullHTML(){
+  const css = collectCSS();
+  const cv  = buildCV(D);
+  // تضمين أيقونات FontAwesome كـ SVG بدلاً من font-based
+  return `<!DOCTYPE html>
+<html dir="ltr" lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+<style>
+/* ── RESET ── */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+*{letter-spacing:0!important}
+html,body{margin:0;padding:0;background:#fff;width:210mm;font-family:'Cairo','Segoe UI',Arial,sans-serif}
+/* ── PRINT ── */
+@page{margin:0;size:210mm 297mm;padding:0}
+@media print{
+  html,body{width:210mm;margin:0;padding:0;background:#fff!important;-webkit-print-color-adjust:exact;print-color-adjust:exact;color-adjust:exact}
+  *{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}
+  .no-print{display:none!important}
+}
+/* ── CV STYLES ── */
+${css}
+</style>
+</head>
+<body>
+<div style="width:210mm;background:#fff;direction:ltr;overflow:hidden">${cv}</div>
+<script>
+// Auto-print when opened in new tab/window
+window.onload=function(){
+  setTimeout(function(){window.print();},500);
+};
+<\/script>
+</body>
+</html>`;
+}
+
+window.startExport = function(fmt){
+  closePreview(); closeDesign();
+  if(fmt === 'pdf') doExportPDF();
+  else doExportPNG();
+};
+
+/* ══ PDF / طباعة ══
+   يفتح الملف مباشرة داخل علامة تبويب جديدة
+   على Android: يعمل مباشرة أو يحفظ PDF تلقائياً */
+function doExportPDF(){
+  showDL('جاري فتح نافذة الطباعة...');
+
+  const html  = buildFullHTML();
+  const blob  = new Blob([html], {type: 'text/html;charset=utf-8'});
+  const url   = URL.createObjectURL(blob);
+
+  // محاولة 1: تحميل مباشر كـ HTML (يدعمه Chrome Android)
+  const tryDirectDownload = ()=>{
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = (D.name||'cv') + '_print.html';
+    a.style.display = 'none';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    hideDL();
+    toast('افتح الملف واختر "طباعة → حفظ PDF" ✓','ok');
+    setTimeout(()=> URL.revokeObjectURL(url), 30000);
+  };
+
+  // محاولة 2: فتح في نافذة جديدة (يعمل عندما تسمح النوافذ المنبثقة)
+  const win = window.open('','_blank');
+  if(win && !win.closed){
+    win.document.write(html);
+    win.document.close();
+    hideDL();
+    EXP++; localStorage.setItem('cvpro_exp', EXP);
+    toast('اختر "طباعة" ثم "حفظ كـ PDF" ✓','ok');
+  } else {
+    // fallback: تحميل مباشر
+    tryDirectDownload();
+  }
+}
+
+/* ══ PNG ══
+   يرسم السيرة على Canvas ثم يحفظها كصورة
+   يعمل 100% بدون أي مكتبة خارجية */
+function doExportPNG(){
+  showDL('جاري إنشاء الصورة...');
+
+  // نعرض السيرة كاملة في div مؤقت ثم نلتقطها
+  // نستخدم الـ cvsheet-desktop المرئي مباشرة إذا كان موجوداً
+  const liveSheet = document.getElementById('cvsheet-desktop');
+
+  if(liveSheet && liveSheet.offsetWidth > 0){
+    // على الكمبيوتر — استخدم العنصر المرئي
+    captureElement(liveSheet);
+  } else {
+    // على الموبايل — أنشئ عنصراً مؤقتاً مرئياً
+    const tmp = document.createElement('div');
+    tmp.style.cssText = [
+      'position:fixed','top:0','left:0',
+      'width:794px','background:#fff',
+      'direction:ltr','z-index:9999',
+      'transform-origin:top left'
+    ].join(';');
+    tmp.innerHTML = buildCV(D);
+    document.body.appendChild(tmp);
+
+    // انتظر الصور
+    const imgs = tmp.querySelectorAll('img');
+    const loads = Array.from(imgs).map(img => new Promise(r=>{
+      if(img.complete && img.naturalWidth>0) r();
+      else { img.onload = r; img.onerror = r; }
+    }));
+    Promise.all(loads).then(()=>{
+      setTimeout(()=>{
+        captureElement(tmp, ()=> document.body.removeChild(tmp));
+      }, 300);
+    });
+  }
+}
+
+function captureElement(el, cleanup){
+  // استخدام SVG foreignObject لتحويل HTML → Canvas
+  // هذه الطريقة تعمل على جميع المتصفحات الحديثة بدون مكتبات
+  const W = el.scrollWidth  || 794;
+  const H = el.scrollHeight || 1123;
+
+  // نجرب أولاً XMLSerializer → SVG → Canvas
+  try{
+    const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}">
+      <foreignObject width="${W}" height="${H}">
+        <div xmlns="http://www.w3.org/1999/xhtml">${el.outerHTML}</div>
+      </foreignObject>
+    </svg>`;
+
+    const blob = new Blob([svg], {type:'image/svg+xml;charset=utf-8'});
+    const url  = URL.createObjectURL(blob);
+    const img  = new Image();
+    img.onload = ()=>{
+      const canvas = document.createElement('canvas');
+      canvas.width  = W * 2;  // @2x جودة عالية
+      canvas.height = H * 2;
+      const ctx = canvas.getContext('2d');
+      ctx.scale(2,2);
+      ctx.fillStyle = '#ffffff';
+      ctx.fillRect(0,0,W,H);
+      ctx.drawImage(img,0,0,W,H);
+      URL.revokeObjectURL(url);
+      if(cleanup) cleanup();
+      const a = document.createElement('a');
+      a.download = (D.name||'cv') + '.png';
+      a.href = canvas.toDataURL('image/png',1.0);
+      a.click();
+      EXP++; localStorage.setItem('cvpro_exp', EXP);
+      hideDL(); toast('تم تحميل PNG ✓','ok');
+    };
+    img.onerror = ()=>{
+      URL.revokeObjectURL(url);
+      if(cleanup) cleanup();
+      // fallback: تحميل كـ HTML
+      fallbackHTMLDownload(cleanup);
+    };
+    img.src = url;
+  } catch(e){
+    if(cleanup) cleanup();
+    fallbackHTMLDownload();
+  }
+}
+
+/* Fallback نهائي: تحميل كـ HTML يمكن طباعته */
+function fallbackHTMLDownload(cleanup){
+  const html  = buildFullHTML();
+  const blob  = new Blob([html], {type:'text/html;charset=utf-8'});
+  const url   = URL.createObjectURL(blob);
+  const a     = document.createElement('a');
+  a.href      = url;
+  a.download  = (D.name||'cv') + '.html';
+  a.click();
+  setTimeout(()=> URL.revokeObjectURL(url), 5000);
+  hideDL();
+  toast('حُفظ كـ HTML — افتحه واطبع كـ PDF','ok');
+}
+
+/* ═══ MODALS ═══ */
+function showConfirm(ico,title,msg,ok){
+  document.getElementById('cm-ico').textContent=ico;
+  document.getElementById('cm-title').textContent=title;
+  document.getElementById('cm-msg').textContent=msg;
+  document.getElementById('cm-ok').onclick=ok;
+  document.getElementById('confirm-modal').classList.add('open');
+}
+window.closeConfirm=function(){document.getElementById('confirm-modal').classList.remove('open')};
+
+function toast(msg,type=''){
+  document.querySelectorAll('.toast').forEach(t=>t.remove());
+  const el=document.createElement('div');el.className='toast '+(type||'');el.textContent=msg;
+  document.body.appendChild(el);setTimeout(()=>el.remove(),2800);
+}
+
+/* ═══ BUILD CV ═══ */
+function buildCV(d){
+  const T=d.tpl||1, C=d.color||'#1a6b8a', cl=d.cvLang||'fr';
+  const Lx=k=>TR[cl]?.cv?.[k]||TR.fr.cv[k]||k;
+  const pct=s=>{let h=0;for(const c of s)h=(h*31+c.charCodeAt(0))&0xffff;return 62+h%30};
+  const cts=[d.email&&{i:'fa-envelope',v:d.email},d.phone&&{i:'fa-phone',v:d.phone},d.addr&&{i:'fa-map-marker-alt',v:d.addr},d.web&&{i:'fa-globe',v:d.web}].filter(Boolean);
+  const PH=(w,h)=>d.photo?`<img src="${d.photo}" style="width:${w};height:${h};object-fit:cover;object-position:center top;display:block">`:`<div class="noph" style="width:${w};height:${h};display:flex;align-items:center;justify-content:center;font-size:${Math.floor(parseInt(w)*.33)}px"></div>`;
+  const bar=(s,fill,h)=>`<div class="sk-r"><div class="sk-n">${s}</div><div class="sk-b" style="height:${h||'4px'}"><div class="sk-f" style="width:${pct(s)}%;background:${fill}"></div></div></div>`;
+  const lrows=()=>(d.langs||[]).filter(l=>l.l).map(l=>`<div class="lng-r"><span class="lng-n">${l.l}</span><span class="lng-l">${l.lv}</span></div>`).join('');
+  const item=it=>{const ti=it.pos||it.degree||it.name||'',sb=it.company||it.school||it.link||'';if(!ti&&!sb)return'';return`<div class="item"><div class="i-row"><div class="i-title">${ti}</div>${it.dates?`<div class="i-date">${it.dates}</div>`:''}</div>${sb?`<div class="i-sub">${sb}</div>`:''}${it.desc?`<div class="i-desc">${it.desc}</div>`:''}</div>`};
+  const ctH=cls=>cts.map(c=>`<div class="${cls}"><i class="fas ${c.i}"></i><span>${c.v}</span></div>`).join('');
+  const tags=(a,cls)=>a.map(s=>`<span class="${cls||'tag'}">${s}</span>`).join('');
+
+  if(T===1)return`<div class="t1" style="--C:${C}"><div class="accent-bar"></div><div class="hd"><div class="hd-photo">${PH('86px','86px')}</div><div class="hd-info"><div class="name">${d.name||''}</div><div class="jobt">${d.job||''}</div><div class="ct-line">${ctH('ct')}</div></div></div><div class="body"><div class="main">${d.summary?`<div class="sec-h">${Lx('summary')}</div><div class="summary">${d.summary}</div>`:''} ${(d.exp||[]).some(e=>e.pos||e.company)?`<div class="sec-h">${Lx('exp')}</div>${d.exp.map(item).join('')}`:''} ${(d.edu||[]).some(e=>e.degree||e.school)?`<div class="sec-h">${Lx('edu')}</div>${d.edu.map(item).join('')}`:''} ${(d.proj||[]).some(e=>e.name)?`<div class="sec-h">${Lx('proj')}</div>${d.proj.map(item).join('')}`:''}</div><div class="side">${cts.length?`<div class="sd-h">${Lx('contact')}</div>${ctH('s-ct')}`:''} ${(d.skills||[]).length?`<div class="sd-h">${Lx('skills')}</div>${d.skills.map(s=>bar(s,C,'4px')).join('')}`:''} ${(d.soft||[]).length?`<div class="sd-h">${Lx('soft')}</div><div>${tags(d.soft,'tag')}</div>`:''} ${(d.langs||[]).length?`<div class="sd-h">${Lx('langs')}</div>${lrows()}`:''} ${d.hobbies?`<div class="sd-h">${Lx('hobby')}</div><div class="hobb">${d.hobbies}</div>`:''}</div></div></div>`;
+
+  if(T===2)return`<div class="t2" style="--C:${C}"><div class="side" style="background:${C}"><div class="s-photo">${PH('195px','205px')}</div><div class="s-body"><div class="s-name">${d.name||''}</div><div class="s-job">${d.job||''}</div>${cts.length?`<div class="sd-h">${Lx('contact')}</div>${ctH('s-ct')}`:''}${(d.skills||[]).length?`<div class="sd-h">${Lx('skills')}</div>${d.skills.map(s=>bar(s,'rgba(255,255,255,.65)','3px')).join('')}`:''}${(d.soft||[]).length?`<div class="sd-h">${Lx('soft')}</div>${tags(d.soft,'tag')}`:''}${(d.langs||[]).length?`<div class="sd-h">${Lx('langs')}</div>${lrows()}`:''}${d.hobbies?`<div class="sd-h">${Lx('hobby')}</div><div class="hobb">${d.hobbies}</div>`:''}</div></div><div class="main"><div class="m-top" style="background:${C}"><div class="m-name">${d.name||''}</div><div class="m-job">${d.job||''}</div></div><div class="m-body">${d.summary?`<div class="sec-h">${Lx('summary')}</div><div class="summary">${d.summary}</div>`:''}${(d.exp||[]).some(e=>e.pos||e.company)?`<div class="sec-h">${Lx('exp')}</div>${d.exp.map(item).join('')}`:''}${(d.edu||[]).some(e=>e.degree||e.school)?`<div class="sec-h">${Lx('edu')}</div>${d.edu.map(item).join('')}`:''}${(d.proj||[]).some(e=>e.name)?`<div class="sec-h">${Lx('proj')}</div>${d.proj.map(item).join('')}`:''}${(d.skills||[]).length?`<div class="sec-h">${Lx('skills')}</div><div>${tags(d.skills,'chip')}</div>`:''}</div></div></div>`;
+
+  if(T===3)return`<div class="t3" style="--C:${C}"><div class="hd"><div class="hd-col"><div class="hd-photo-blk">${PH('158px','178px')}</div></div><div class="hd-info"><div class="name">${d.name||''}</div><div class="jobt">${d.job||''}</div><div class="ct-list">${ctH('ct')}</div></div></div><div class="body"><div class="main">${d.summary?`<div class="sec-h">${Lx('summary')}</div><div class="summary">${d.summary}</div>`:''}${(d.exp||[]).some(e=>e.pos||e.company)?`<div class="sec-h">${Lx('exp')}</div>${d.exp.map(item).join('')}`:''}${(d.edu||[]).some(e=>e.degree||e.school)?`<div class="sec-h">${Lx('edu')}</div>${d.edu.map(item).join('')}`:''}${(d.proj||[]).some(e=>e.name)?`<div class="sec-h">${Lx('proj')}</div>${d.proj.map(item).join('')}`:''}</div><div class="side">${cts.length?`<div class="sd-h">${Lx('contact')}</div>${ctH('s-ct')}`:''}${(d.skills||[]).length?`<div class="sd-h">${Lx('skills')}</div>${d.skills.map(s=>bar(s,C,'5px')).join('')}`:''}${(d.soft||[]).length?`<div class="sd-h">${Lx('soft')}</div><div>${tags(d.soft,'tag')}</div>`:''}${(d.langs||[]).length?`<div class="sd-h">${Lx('langs')}</div>${lrows()}`:''}${d.hobbies?`<div class="sd-h">${Lx('hobby')}</div><div class="hobb">${d.hobbies}</div>`:''}</div></div></div>`;
+
+  if(T===4)return`<div class="t4" style="--C:${C}"><div class="hd"><div class="hd-photo">${PH('84px','84px')}</div><div class="hd-info"><div class="name">${d.name||''}</div><div class="jobt">${d.job||''}</div><div class="ct-row">${ctH('ct')}</div></div></div><div class="body"><div class="main">${d.summary?`<div class="sec-h">${Lx('summary')}</div><div class="summary">${d.summary}</div>`:''}${(d.exp||[]).some(e=>e.pos||e.company)?`<div class="sec-h">${Lx('exp')}</div>${d.exp.map(item).join('')}`:''}${(d.edu||[]).some(e=>e.degree||e.school)?`<div class="sec-h">${Lx('edu')}</div>${d.edu.map(item).join('')}`:''}${(d.proj||[]).some(e=>e.name)?`<div class="sec-h">${Lx('proj')}</div>${d.proj.map(item).join('')}`:''}</div><div class="side">${cts.length?`<div class="sd-h">${Lx('contact')}</div>${ctH('s-ct')}`:''}${(d.skills||[]).length?`<div class="sd-h">${Lx('skills')}</div>${d.skills.map(s=>bar(s,C,'2px')).join('')}`:''}${(d.soft||[]).length?`<div class="sd-h">${Lx('soft')}</div><div>${tags(d.soft,'tag')}</div>`:''}${(d.langs||[]).length?`<div class="sd-h">${Lx('langs')}</div>${lrows()}`:''}${d.hobbies?`<div class="sd-h">${Lx('hobby')}</div><div class="hobb">${d.hobbies}</div>`:''}</div></div></div>`;
+
+  if(T===5)return`<div class="t5" style="--C:${C}">
+    <div class="hd">
+      <div class="hd-circles"></div><div class="hd-circles2"></div>
+      <div class="hd-photo-ring">${PH('100px','100px')}</div>
+      <div class="hd-name">${d.name||''}</div>
+      <div class="hd-job">${d.job||''}</div>
+      <div class="hd-cts">${cts.map(c=>`<div class="hd-ct"><i class="fas ${c.i}"></i><span>${c.v}</span></div>`).join('')}</div>
+      <div class="hd-wave"></div>
+    </div>
+    <div class="body">
+      <div class="main">
+        ${d.summary?`<div class="sec-h">${Lx('summary')}</div><div class="summary">${d.summary}</div>`:''}
+        ${(d.exp||[]).some(e=>e.pos||e.company)?`<div class="sec-h">${Lx('exp')}</div>${d.exp.map(item).join('')}`:''}
+        ${(d.edu||[]).some(e=>e.degree||e.school)?`<div class="sec-h">${Lx('edu')}</div>${d.edu.map(item).join('')}`:''}
+        ${(d.proj||[]).some(e=>e.name)?`<div class="sec-h">${Lx('proj')}</div>${d.proj.map(item).join('')}`:''}
+      </div>
+      <div class="side">
+        ${cts.length?`<div class="sd-h">${Lx('contact')}</div>${cts.map(c=>`<div class="s-ct"><i class="fas ${c.i}"></i><span>${c.v}</span></div>`).join('')}`:''}
+        ${(d.skills||[]).length?`<div class="sd-h">${Lx('skills')}</div>${d.skills.map(s=>bar(s,C,'6px')).join('')}`:''}
+        ${(d.soft||[]).length?`<div class="sd-h">${Lx('soft')}</div><div>${tags(d.soft,'tag')}</div>`:''}
+        ${(d.langs||[]).length?`<div class="sd-h">${Lx('langs')}</div>${lrows()}`:''}
+        ${d.hobbies?`<div class="sd-h">${Lx('hobby')}</div><div class="hobb">${d.hobbies}</div>`:''}
+      </div>
+    </div>
+  </div>`;
+
+  if(T===6){
+    const dotbar=(s,fill)=>{const p=pct(s);const dots=5;const filled=Math.round(p/100*dots);return`<div class="sk-r"><div class="sk-n">${s}</div><div class="sk-dots">${Array.from({length:dots},(_,i)=>`<div class="sk-dot${i<filled?' on':''}"></div>`).join('')}</div></div>`};
+    return`<div class="t6" style="--C:${C}">
+      <div class="band"></div>
+      <div class="inner">
+        <div class="hd">
+          <div class="hd-photo">${PH('90px','90px')}</div>
+          <div class="hd-info">
+            <div class="name">${d.name||''}</div>
+            <div class="jobt">${d.job||''}</div>
+            <div class="ct-line">${cts.map(c=>`<div class="ct"><i class="fas ${c.i}"></i><span>${c.v}</span></div>`).join('')}</div>
+          </div>
+        </div>
+        <div class="body">
+          <div class="main">
+            ${d.summary?`<div class="sec-h">${Lx('summary')}</div><div class="summary">${d.summary}</div>`:''}
+            ${(d.exp||[]).some(e=>e.pos||e.company)?`<div class="sec-h">${Lx('exp')}</div>${d.exp.map(item).join('')}`:''}
+            ${(d.edu||[]).some(e=>e.degree||e.school)?`<div class="sec-h">${Lx('edu')}</div>${d.edu.map(item).join('')}`:''}
+            ${(d.proj||[]).some(e=>e.name)?`<div class="sec-h">${Lx('proj')}</div>${d.proj.map(item).join('')}`:''}
+          </div>
+          <div class="side">
+            ${cts.length?`<div class="sd-h">${Lx('contact')}</div>${cts.map(c=>`<div class="s-ct"><i class="fas ${c.i}"></i><span>${c.v}</span></div>`).join('')}`:''}
+            ${(d.skills||[]).length?`<div class="sd-h">${Lx('skills')}</div>${d.skills.map(s=>dotbar(s,C)).join('')}`:''}
+            ${(d.soft||[]).length?`<div class="sd-h">${Lx('soft')}</div><div>${tags(d.soft,'tag')}</div>`:''}
+            ${(d.langs||[]).length?`<div class="sd-h">${Lx('langs')}</div><div>${(d.langs||[]).filter(l=>l.l).map(l=>`<div class="lng-r"><span class="lng-n">${l.l}</span><span class="lng-l">${l.lv}</span></div>`).join('')}</div>`:''}
+            ${d.hobbies?`<div class="sd-h">${Lx('hobby')}</div><div class="hobb">${d.hobbies}</div>`:''}
+          </div>
+        </div>
+      </div>
+    </div>`;
+  }
+
+
+    return`<div style="padding:20px;font-family:Arial">${d.name||'CV'}</div>`;
+}
+
+/* ═══════════════════════════════
+   FIREBASE — تسجيل الدخول + حفظ السحابة
+═══════════════════════════════ */
+const FB_CFG = {
+  apiKey: "AIzaSyB17QIVmJWD0HUt0hliyUROSlyimd_QiPI",
+  authDomain: "biographie-9410b.firebaseapp.com",
+  projectId: "biographie-9410b",
+  storageBucket: "biographie-9410b.firebasestorage.app",
+  messagingSenderId: "417786179416",
+  appId: "1:417786179416:web:0910b9f8b63c50818fbf2d"
+};
+
+let fbApp, fbAuth, fbDB, fbUser = null;
+
+function initFirebase(){
+  try {
+    fbApp  = firebase.initializeApp(FB_CFG);
+    fbAuth = firebase.auth();
+    fbDB   = firebase.firestore();
+
+    // مراقبة حالة تسجيل الدخول
+    fbAuth.onAuthStateChanged(user => {
+      fbUser = user;
+      if(user){
+        // مستخدم مسجّل — أظهر صورته
+        const av = document.getElementById('user-avatar');
+        const ph = document.getElementById('user-photo');
+        const lb = document.getElementById('btn-logout');
+        if(av && user.photoURL){ ph.src = user.photoURL; av.style.display='block'; }
+        if(lb) lb.style.display = 'block';
+        // إخفاء loader وفتح لوحة التحكم
+        document.getElementById('loader').style.display = 'none';
+        goPage('dash');
+      } else {
+        // غير مسجّل — اذهب لصفحة الدخول
+        fbUser = null;
+        const av = document.getElementById('user-avatar');
+        const lb = document.getElementById('btn-logout');
+        if(av) av.style.display='none';
+        if(lb) lb.style.display='none';
+        document.getElementById('loader').style.display = 'none';
+        goPage('login');
+      }
+    });
+  } catch(e){
+    console.error('Firebase init failed:', e);
+    document.getElementById('loader').style.display = 'none';
+    goPage('login');
+  }
+}
+
+/* تسجيل الدخول بـ Google */
+window.loginGoogle = function(){
+  const provider = new firebase.auth.GoogleAuthProvider();
+  fbAuth.signInWithPopup(provider)
+    .then(result => {
+      fbUser = result.user;
+      toast('مرحباً ' + fbUser.displayName + ' 👋','ok');
+    })
+    .catch(err => {
+      if(err.code === 'auth/popup-blocked'){
+        // بديل للموبايل — redirect
+        fbAuth.signInWithRedirect(provider);
+      } else {
+        toast('فشل تسجيل الدخول: ' + err.message,'err');
+      }
+    });
+};
+
+/* تسجيل الخروج */
+window.confirmLogout = function(){
+  showConfirm('👋','تسجيل الخروج','هل تريد تسجيل الخروج؟', doLogout);
+};
+window.doLogout = function(){
+  fbAuth.signOut().then(()=>{
+    CVS = []; fbUser = null;
+    closeConfirm();
+    goPage('login');
+    toast('تم تسجيل الخروج','ok');
+  });
+};
+
+/* ── حفظ السيرات في Firestore ── */
+function getUserCVsRef(){
+  if(!fbUser || !fbDB) return null;
+  return fbDB.collection('users').doc(fbUser.uid).collection('cvs');
+}
+
+/* تحميل السيرات من السحابة */
+async function loadCVsFromCloud(){
+  const ref = getUserCVsRef();
+  if(!ref){ 
+    // وضع تجريبي — من localStorage فقط
+    CVS = JSON.parse(localStorage.getItem('cvpro_cvs')||'[]');
+    return;
+  }
+  try {
+    const snap = await ref.orderBy('_date','desc').get();
+    CVS = snap.docs.map(d => ({ _fireId: d.id, ...d.data() }));
+    // حفظ نسخة محلية أيضاً
+    localStorage.setItem('cvpro_cvs', JSON.stringify(CVS));
+  } catch(e){
+    // fallback للمحلي
+    CVS = JSON.parse(localStorage.getItem('cvpro_cvs')||'[]');
+  }
+}
+
+/* حفظ سيرة واحدة في السحابة */
+async function saveCVToCloud(cv){
+  const ref = getUserCVsRef();
+  if(!ref) return;
+  try {
+    const data = { ...cv };
+    delete data._fireId;
+    if(cv._fireId){
+      await ref.doc(cv._fireId).set(data);
+    } else {
+      const docRef = await ref.add(data);
+      cv._fireId = docRef.id;
+    }
+  } catch(e){ console.error('Cloud save failed:', e); }
+}
+
+/* حذف سيرة من السحابة */
+async function deleteCVFromCloud(cv){
+  const ref = getUserCVsRef();
+  if(!ref || !cv._fireId) return;
+  try { await ref.doc(cv._fireId).delete(); }
+  catch(e){ console.error('Cloud delete failed:', e); }
+}
+
+/* ── تحديث دوال Dashboard لتستخدم السحابة ── */
+async function loadDash(){
+  await loadCVsFromCloud();
+  document.getElementById('s-cnt').textContent = CVS.length;
+  document.getElementById('s-exp').textContent = EXP;
+  // تحديث اسم المستخدم في الترحيب
+  if(fbUser){
+    const el = document.querySelector('[data-k="dtitle"]');
+    if(el) el.innerHTML = 'مرحباً ' + (fbUser.displayName||'') + ' 👋<small data-k="dsub">إنشاء وإدارة سيرك الذاتية</small>';
+  }
+  renderDash();
+}
+
+function saveCVS(){
+  localStorage.setItem('cvpro_cvs', JSON.stringify(CVS));
+}
+
+/* حفظ مع السحابة */
+window.saveCV = async function(){
+  const t = D.name || D._title || T().dnew;
+  D._title = t;
+  if(!CID){
+    CID = 'L' + Date.now();
+    D._id = CID;
+    D._date = new Date().toLocaleDateString();
+    CVS.push(D);
+  } else {
+    const i = CVS.findIndex(c => c._id === CID);
+    if(i >= 0) CVS[i] = D; else CVS.push(D);
+  }
+  saveCVS();
+  await saveCVToCloud(D);
+  toast(T().save + ' ✓','ok');
+};
+
+/* حذف مع السحابة */
+window.doDel = async function(id){
+  const cv = CVS.find(c => c._id === id);
+  CVS = CVS.filter(c => c._id !== id);
+  saveCVS();
+  if(cv) await deleteCVFromCloud(cv);
+  loadDash();
+  closeConfirm();
+};
+
+/* ═══ BOOT ═══ */
+(()=>{
+  setLang('ar');
+  initFirebase();
+})();
+</script>
+</body>
+</html>
